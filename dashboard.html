@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+
+    <link rel="icon" href="asset/logo-21.png" type="image/x-icon">
+
+    <!-- Link Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+
+    <!-- Link Icon -->
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- Link css -->
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <nav class="sidebar close">
+      <header>
+        <div class="header-logo">
+          <span class="image">
+            <img src="asset/logo-21.png" alt="logo" />
+          </span>
+
+          <div class="text logo-text">
+            <span class="name">Jakarta 21</span>
+          </div>
+        </div>
+
+        <i class="bx bx-chevron-right toggle"></i>
+      </header>
+
+      <div class="nav-menu">
+        <div class="menu">
+          <ul class="menu-links">
+            <li class="nav-link">
+              <a href="dashboard.html">
+                <i class="bx bx-home-alt icon"></i>
+                <span class="text nav-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="about.html">
+                <i class="bx bx-info-circle icon"></i>
+                <span class="text nav-text">About</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="profile.html">
+                <i class="bx bx-user-circle icon"></i>
+                <span class="text nav-text">Profile</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bottom-content">
+          <ul>
+            <li class="">
+              <a href="#">
+                <i class="bx bx-log-out icon"></i>
+                <span class="text nav-text">Logout</span>
+              </a>
+            </li>
+            <li class="mode">
+                <span class="mode-text text">Dark mode</span>
+
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="home">
+      <h1 class="text">Pizza Sales Report</h1>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
