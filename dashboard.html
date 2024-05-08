@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
 
-    <link rel="icon" href="asset/logo-21.png" type="image/x-icon">
+    <link rel="icon" href="asset/logo-21.png" type="image/x-icon" />
 
     <!-- Link Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
 
     <!-- Link Icon -->
     <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
@@ -18,20 +18,19 @@
     <!-- Link css -->
     <link rel="stylesheet" href="dashboard.css" />
   </head>
+  
   <body>
-    <!-- Sidebar -->
-    <nav class="sidebar close">
+    <!-- ========== Sidebar ========== -->
+    <nav class="sidebar close-sidebar">
       <header>
         <div class="header-logo">
           <span class="image">
             <img src="asset/logo-21.png" alt="logo" />
           </span>
-
           <div class="text logo-text">
             <span class="name">Jakarta 21</span>
           </div>
         </div>
-
         <i class="bx bx-chevron-right toggle"></i>
       </header>
 
@@ -58,7 +57,7 @@
             </li>
           </ul>
         </div>
-        
+
         <div class="bottom-content">
           <ul>
             <li class="">
@@ -68,19 +67,114 @@
               </a>
             </li>
             <li class="mode">
-                <span class="mode-text text">Dark mode</span>
-
-                <div class="toggle-switch">
-                    <span class="switch"></span>
-                </div>
+              <span class="mode-text text">Dark mode</span>
+              <div class="toggle-switch">
+                <span class="switch"></span>
+              </div>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <section class="home">
-      <h1 class="text">Pizza Sales Report</h1>
+    <!-- ========== Section ========== -->
+    <section class="content">
+      <div class="header">
+        <div>
+          <h1 class="content-text">Pizza Sales Report</h1>
+        </div>
+
+        <div class="select">
+          <div class="select-dropdown">
+            <div class="select-btn btn1">
+              <span class="btn-text">Pizza Type</span>
+              <span class="arrow-dwn">
+                <i class="bx bx-chevron-up"></i>
+              </span>
+            </div>
+            <ul class="list-items">
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+            </ul>
+          </div>
+          <div class="select-dropdown">
+            <div class="select-btn btn2">
+              <span class="btn-text">Category</span>
+              <span class="arrow-dwn">
+                <i class="bx bx-chevron-up"></i>
+              </span>
+            </div>
+            <ul class="list-items">
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+            </ul>
+          </div>
+          <div class="select-dropdown">
+            <div class="select-btn btn3">
+              <span class="btn-text">Size</span>
+              <span class="arrow-dwn">
+                <i class="bx bx-chevron-up"></i>
+              </span>
+            </div>
+            <ul class="list-items">
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+            </ul>
+          </div>
+          <div class="select-dropdown">
+            <div class="select-btn btn4">
+              <span class="btn-text">Price Range</span>
+              <span class="arrow-dwn">
+                <i class="bx bx-chevron-up"></i>
+              </span>
+            </div>
+            <ul class="list-items">
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+              <li class="item">
+                <input type="checkbox" id="pizza-type" />
+                <label for="pizza-type">Ayam</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <script src="script.js"></script>
