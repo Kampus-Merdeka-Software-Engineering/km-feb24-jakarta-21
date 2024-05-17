@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+
+    <link rel="icon" href="../asset/logo-team-21.png" type="image/x-icon" />
+
+    <!-- Link Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
+
+    <!-- Link Icon -->
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- Link css -->
+    <link rel="stylesheet" href="css/profile.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+  </head>
+  
+  <body>
+    <!-- ========== Sidebar ========== -->
+    <nav class="sidebar close-sidebar ">
+      <header>
+        <div class="header-logo">
+          <span class="image">
+            <img src="asset/logo-team-21.png" alt="logo" />
+          </span>
+          <div class="text logo-text">
+            <span class="name">Jakarta 21</span>
+          </div>
+        </div>
+        <i class="bx bx-chevron-right toggle"></i>
+      </header>
+      <div class="nav-menu">
+        <div class="menu">
+          <ul class="menu-links">
+            <li class="nav-link">
+              <a href="index.html">
+                <i class="bx bx-home-alt icon"></i>
+                <span class="text nav-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="profile.html">
+                <i class="bx bx-user-circle icon"></i>
+                <span class="text nav-text">Profile</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bottom-content">
+          <ul>
+            <li class="mode toggle-switch">
+              <div class="sun-moon ">
+                  <i class='bx bx-moon icon moon '></i>
+                  <i class='bx bx-sun icon sun '></i>
+              </div>
+              <span class="mode-text text">Dark mode</span>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hamburger">
+      <div class="nav-hamburger">
+        <i class='bx bx-menu' id="btn" ></i>
+      </div>
+    </div>
+
+    <!-- ========== Profile ========== -->
+    <section class="container-profile">
+        <div class="team">
+          <h1>Team 21 Section Jakarta</h1>
+        </div>
+
+        <div class="container-card">
+        </div>
+    </section>
+
+    <script src="javascript/profile.js"></script>
+    <script src="javascript/sidebar.js"></script>
+  </body>
+</html>
