@@ -1,0 +1,240 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+}
+
+:root {
+  /* ===== Color ===== */
+  --body-color: #e4e9f7;
+  --sidebar-color: #fff;
+  --toggle-color: #886839;
+  --card-sidebar-color: #eceafb;
+  --text-color: #1b1b1b;
+
+  /* ====== Transition ====== */
+  --tran-03: all 0.2s ease;
+  --tran-03: all 0.3s ease;
+  --tran-04: all 0.3s ease;
+  --tran-05: all 0.3s ease;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--body-color);
+  transition: var(--tran-05);
+}
+
+body.dark {
+  --body-color: #1b1b1b;
+  --sidebar-color: #1b1b1b;
+  --toggle-color: #886839;
+  --card-sidebar-color: #2c2f38;
+  --text-color: #fff;
+}
+
+/* ========== Sidebar ========== */
+/* ========== Sidebar ========== */
+/* ========== Sidebar ========== */
+.sidebar {
+  position: fixed;
+  height: 100%;
+  width: 180px;
+  padding: 5px 10px;
+  box-shadow: 0.5px 0 5px var(--text-color);
+  background: var(--sidebar-color);
+  transition: var(--tran-05);
+  /* z-index: 100; */
+}
+.sidebar.close-sidebar {
+  width: 70px;
+}
+
+.sidebar header {
+  position: relative;
+}
+
+.sidebar header .header-logo {
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
+}
+.sidebar header .image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  border-radius: 5px;
+}
+.sidebar header .image img {
+  width: 30px;
+  border-radius: 5px;
+}
+.sidebar .header-logo .name {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.sidebar header .toggle {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%) rotate(180deg);
+  height: 20px;
+  width: 20px;
+  background-color: var(--toggle-color);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: var(--tran-05);
+}
+.sidebar.close-sidebar .toggle {
+  transform: translateY(-50%) rotate(0deg);
+}
+.sidebar.close-sidebar .text {
+  opacity: 0;
+}
+
+.sidebar .icon {
+  min-width: 48px;
+  border-radius: 5px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+.sidebar .text,
+.sidebar .icon {
+  color: var(--text-color);
+  transition: var(--tran-03);
+}
+.sidebar .text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 1;
+}
+
+.sidebar .nav-menu {
+  height: calc(100% - 55px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* overflow-y: scroll; */
+}
+/* .nav-menu::-webkit-scrollbar {
+        display: none;
+    } */
+.sidebar .menu {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sidebar li {
+  height: 50px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.sidebar li a {
+  list-style: none;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: var(--tran-03);
+}
+.sidebar li a:hover,
+.sidebar .nav-menu .mode:hover {
+  background-color: var(--card-sidebar-color);
+}
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text {
+  color: var(--text-color);
+}
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text {
+  color: var(--text-color);
+}
+
+.sidebar .nav-menu .mode {
+  border-radius: 5px;
+  position: relative;
+  transition: var(--tran-05);
+}
+
+.nav-menu .mode .sun-moon {
+  height: 50px;
+  min-width: 48px;
+}
+
+.mode .sun-moon i {
+  position: absolute;
+}
+.mode .sun-moon i.sun {
+  opacity: 0;
+}
+body.dark .mode .sun-moon i.sun {
+  opacity: 1;
+}
+body.dark .mode .sun-moon i.moon {
+  opacity: 0;
+}
+
+.sidebar .bottom-content .toggle-switch {
+  cursor: pointer;
+  transition: var(--tran-05);
+}
+
+/* Hamburger Menu */
+.hamburger {
+  width: 100%;
+  display: none;
+  background-color: var(--body-color);
+  padding: 10px 20px;
+  box-shadow: 0.5px 0 5px var(--text-color);
+}
+
+.nav-hamburger {
+  border-radius: 5px;
+  background-color: var(--toggle-color);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+}
+
+.nav-hamburger i {
+  font-size: 2rem;
+  color: #fff;
+}
+
+
+@media screen and (max-width: 768px) {
+  .sidebar.close-sidebar {
+    opacity: 0;
+  }
+  .sidebar header .toggle {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

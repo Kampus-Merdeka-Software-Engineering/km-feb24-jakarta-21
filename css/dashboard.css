@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+}
+
+:root {
+  /* ===== Color ===== */
+  --body-color: #e4e9f7;
+  --toggle-color: #fff;
+  --darkmode: #0075ff;
+  --text-color: #000;
+  --card-filter: #fff;
+  --card-color: #fff;
+
+  /* ====== Transition ====== */
+  --tran-03: all 0.2s ease;
+  --tran-03: all 0.3s ease;
+  --tran-04: all 0.3s ease;
+  --tran-05: all 0.3s ease;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--body-color);
+  transition: var(--tran-05);
+}
+
+body.dark {
+  --body-color: #001838;
+  --toggle-color: #fff;
+  --darkmode: #fff;
+  --text-color: #fff;
+  --card-filter: #d3b786;
+  --card-color: #2c2f38;
+}
+
+.container-dashboard {
+  height: 100%;
+  width: 100%;
+  padding: 15px 2% 15px 6.5%;
+}
+
+/* ========== Dashboard Header ========== */
+/* ========== Dashboard Header ========== */
+.content header {
+  display: flex;
+  justify-content: space-between;
+}
+.content .content-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.content .select {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.content .select-dropdown {
+  padding: 0 5px;
+}
+.content .select-dropdown .select-btn {
+  display: flex;
+  height: 40px;
+  width: 150px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--card-filter);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.content .select-btn .btn-text {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-color);
+}
+.content .select-btn .arrow-dwn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  font-size: 1.3rem;
+  transition: var(--tran-03);
+}
+.select-btn.open-list .arrow-dwn {
+  transform: rotate(180deg);
+}
+.select-btn.open-list ~ .list-items {
+  display: block;
+}
+
+.select .list-items {
+  position: absolute;
+  width: 150px;
+  margin-top: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: var(--card-filter);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+.select .list-items .item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  list-style: none;
+  height: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+.select .list-items .item:hover {
+  background-color: var(--body-color);
+}
+.select .list-items .item label {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-color);
+}
+.select .list-items .item #pizza-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  border-radius: 5px;
+  margin-right: 10px;
+  transition: var(--tran-03);
+}
+
+/* ========== Dashboard Analys ========== */
+/* ========== Dashboard Analys ========== */
+.analys {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 2rem;
+  justify-items: center;
+}
+.analys .analys-sales {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--card-color);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.analys-sales .sales-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.analys-sales .sales-icon i {
+  font-size: 2.5rem;
+  color: var(--text-color);
+}
+
+.analys-sales .sales-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.analys-sales .sales-text h3 {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+.analys-sales .sales-text h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+

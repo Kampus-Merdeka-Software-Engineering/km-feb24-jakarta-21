@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
 
-    <link rel="icon" href="asset/logo-21.png" type="image/x-icon" />
+    <link rel="icon" href="../asset/logo-team-21.png" type="image/x-icon" />
 
     <!-- Link Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,16 +16,17 @@
     <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
 
     <!-- Link css -->
-    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
   </head>
-  
+
   <body>
     <!-- ========== Sidebar ========== -->
     <nav class="sidebar close-sidebar">
       <header>
         <div class="header-logo">
           <span class="image">
-            <img src="asset/logo-21.png" alt="logo" />
+            <img src="asset/logo-team-21.png" alt="logo" />
           </span>
           <div class="text logo-text">
             <span class="name">Jakarta 21</span>
@@ -38,15 +39,9 @@
         <div class="menu">
           <ul class="menu-links">
             <li class="nav-link">
-              <a href="dashboard.html">
+              <a href="index.html">
                 <i class="bx bx-home-alt icon"></i>
                 <span class="text nav-text">Dashboard</span>
-              </a>
-            </li>
-            <li class="nav-link">
-              <a href="about.html">
-                <i class="bx bx-info-circle icon"></i>
-                <span class="text nav-text">About</span>
               </a>
             </li>
             <li class="nav-link">
@@ -60,31 +55,30 @@
 
         <div class="bottom-content">
           <ul>
-            <li class="">
-              <a href="#">
-                <i class="bx bx-log-out icon"></i>
-                <span class="text nav-text">Logout</span>
-              </a>
-            </li>
-            <li class="mode">
-              <span class="mode-text text">Dark mode</span>
-              <div class="toggle-switch">
-                <span class="switch"></span>
+            <li class="mode toggle-switch">
+              <div class="sun-moon">
+                <i class="bx bx-moon icon moon"></i>
+                <i class="bx bx-sun icon sun"></i>
               </div>
+              <span class="mode-text text">Dark mode</span>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <!-- ========== Section ========== -->
-    <section class="content">
-      <div class="header">
-        <div>
-          <h1 class="content-text">Pizza Sales Report</h1>
-        </div>
+    <div class="hamburger">
+      <div class="nav-hamburger">
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+    </div>
 
-        <div class="select">
+    <!-- ========== Section ========== -->
+    <main class="container-dashboard content">
+      <header>
+        <h1 class="content-text">Pizza Sales Report</h1>
+
+        <form action="" class="select">
           <div class="select-dropdown">
             <div class="select-btn btn1">
               <span class="btn-text">Pizza Type</span>
@@ -173,10 +167,18 @@
               </li>
             </ul>
           </div>
-        </div>
-      </div>
-    </section>
+        </form>
+      </header>
 
-    <script src="script.js"></script>
+      
+    </main>
+
+    <footer>
+      <div class="footer-card">
+        <h3>2024 Team 21 Section Jakarta - MSIB RevoU</h3>
+      </div>
+    </footer>
+    <script src="javascript/filter.js"></script>
+    <script src="javascript/sidebar.js"></script>
   </body>
 </html>
