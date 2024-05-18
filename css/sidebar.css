@@ -202,6 +202,33 @@ body.dark .mode .sun-moon i.moon {
   transition: var(--tran-05);
 }
 
+
+/* Hamburger Menu */
+.hamburger {
+  width: 100%;
+  display: none;
+  background-color: var(--body-color);
+  padding: 10px 5%;
+  margin-bottom: 10px;
+  box-shadow: 0.5px 0 5px var(--text-color);
+}
+
+.nav-hamburger {
+  border-radius: 5px;
+  background-color: var(--toggle-color);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+}
+
+.nav-hamburger i {
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+
 @media screen and (max-width: 768px) {
   html {
     font-size: 12px !important;
@@ -211,5 +238,9 @@ body.dark .mode .sun-moon i.moon {
   }
   .sidebar header .toggle {
     display: none;
+  }
+  .hamburger {
+    display: flex;
+    justify-content: flex-end;
   }
 }
