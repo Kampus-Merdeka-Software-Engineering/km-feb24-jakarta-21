@@ -1,6 +1,6 @@
-# SECTION JAKARTA - TEAM 21
+# SECTION JAKARTA - TEAM 21 (DASHBOARD PIZZA SALES)
 
-## Team 21 Section Jakarta
+  ## Team 21 Section Jakarta
 
 | Name                        | Role                  |
 |-----------------------------|-----------------------|
