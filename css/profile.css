@@ -100,14 +100,30 @@ p {
   color: var(--text-color);
 }
 
-@media screen and (max-width: 1200px) {
-  
+/* ========== Footer ========== */
+/* ========== Footer ========== */
+footer {
+  background-color: #d3b786;
+  width: 100%;
+  padding: 15px 20px;
+}
+footer .footer-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer .footer-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
 }
 
+@media screen and (max-width: 1200px) {
+
+}
 @media screen and (max-width: 991px) {
 
 }
-
 @media screen and (max-width: 768px) {
   html {
     font-size: 12px !important;
@@ -116,10 +132,8 @@ p {
     padding: 20px 7%;
   }
 }
-
 @media screen and (max-width: 576px) {
   
 }
-
 @media screen and (max-width: 400px) {
 }

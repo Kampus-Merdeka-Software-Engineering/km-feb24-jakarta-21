@@ -139,6 +139,24 @@ header .select-btn .arrow-dwn {
   transition: var(--tran-03);
 }
 
+/* ========== Footer ========== */
+/* ========== Footer ========== */
+footer {
+  background-color: #886839;
+  width: 100%;
+  padding: 15px 20px;
+}
+footer .footer-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer .footer-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
 
 @media screen and (max-width: 1200px) {
   .container-dashboard {
