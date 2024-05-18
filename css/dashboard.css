@@ -43,30 +43,28 @@ body.dark {
 .container-dashboard {
   height: 100%;
   width: 100%;
-  padding: 15px 2% 15px 6.5%;
+  padding: 20px 15px 20px 90px;
 }
+
 
 /* ========== Dashboard Header ========== */
 /* ========== Dashboard Header ========== */
-.content header {
+header {
   display: flex;
   justify-content: space-between;
 }
-.content .content-text {
-  font-size: 2.5rem;
+header .content-text {
+  font-size: 2.2rem;
   font-weight: 700;
   color: var(--text-color);
 }
-
-.content .select {
+header .select {
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  gap: 6px;
 }
-.content .select-dropdown {
-  padding: 0 5px;
-}
-.content .select-dropdown .select-btn {
+header .select-dropdown .select-btn {
   display: flex;
   height: 40px;
   width: 150px;
@@ -78,12 +76,12 @@ body.dark {
   background-color: var(--card-filter);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
-.content .select-btn .btn-text {
+header .select-btn .btn-text {
   font-size: 1rem;
   font-weight: 400;
   color: var(--text-color);
 }
-.content .select-btn .arrow-dwn {
+header .select-btn .arrow-dwn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,16 +95,17 @@ body.dark {
 .select-btn.open-list ~ .list-items {
   display: block;
 }
-
 .select .list-items {
   position: absolute;
-  width: 150px;
+  width: 100%;
+  max-height: 400px;
   margin-top: 5px;
   border-radius: 5px;
   padding: 5px;
   background-color: var(--card-filter);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   display: none;
+  overflow-y: scroll;
 }
 .select .list-items .item {
   display: flex;
@@ -116,8 +115,9 @@ body.dark {
   height: 30px;
   cursor: pointer;
   transition: 0.3s;
-  padding: 0 10px;
+  padding: 0 5px;
   border-radius: 5px;
+  background-color: var(--card-filter);
 }
 .select .list-items .item:hover {
   background-color: var(--body-color);
@@ -125,6 +125,7 @@ body.dark {
 .select .list-items .item label {
   font-size: 1rem;
   font-weight: 400;
+  padding-left: 5px;
   color: var(--text-color);
 }
 .select .list-items .item #pizza-type {
@@ -138,53 +139,69 @@ body.dark {
   transition: var(--tran-03);
 }
 
-/* ========== Dashboard Analys ========== */
-/* ========== Dashboard Analys ========== */
-.analys {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 2rem;
-  justify-items: center;
-}
-.analys .analys-sales {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background-color: var(--card-color);
-  border-radius: 5px;
-  box-sizing: border-box;
+
+@media screen and (max-width: 1200px) {
+  .container-dashboard {
+    /* max-width: 1140px; */
+  }
+  header .select-dropdown .select-btn {
+    width: 142px;
+  }
+  .select .list-items {
+    width: 142px;
+  }
 }
 
-.analys-sales .sales-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@media screen and (max-width: 992px) {
+  .container-dashboard {
+    max-width: 992px;
+  }
+  .dash-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 }
 
-.analys-sales .sales-icon i {
-  font-size: 2.5rem;
-  color: var(--text-color);
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 12px !important;
+    background-color: #fff;
+  }
+  .container-dashboard {
+    max-width: 768px;
+    padding: 20px 5%;
+  }
+  header .select {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 10px;
+    gap: 5px;
+  }
+  header .select {
+    width: 100%;
+  }
+  header .select-dropdown .select-btn {
+    width: 100%;
+  }
 }
 
-.analys-sales .sales-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2px;
+@media screen and (max-width: 576px) {
+  .container-dashboard {
+    max-width: 576px;
+  }
 }
 
-.analys-sales .sales-text h3 {
-  font-size: 1rem;
-  color: var(--text-color);
+@media screen and (max-width: 400px) {
+  header .select {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  header .select {
+    width: 95%;
+  }
+  header .select-dropdown .select-btn {
+    width: 100%;
+  }
 }
-.analys-sales .sales-text h1 {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text-color);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
