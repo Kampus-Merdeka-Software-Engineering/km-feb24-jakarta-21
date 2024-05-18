@@ -2,14 +2,14 @@
 const body = document.querySelector("body");
 const sidebar = body.querySelector("nav");
 const toggle = body.querySelector(".toggle");
-const hamburger = body.querySelector(".nav-hamburger");
+const hamburgerMenu = body.querySelector(".nav-hamburger");
 const modeSwitch = body.querySelector(".toggle-switch");
 const modeText = body.querySelector(".mode-text");
 
 toggle.addEventListener("click", () => {
   sidebar.classList.toggle("close-sidebar");
 });
-hamburger.addEventListener("click", () => {
+hamburgerMenu.addEventListener("click", () => {
   sidebar.classList.toggle("close-sidebar");
 });
 
