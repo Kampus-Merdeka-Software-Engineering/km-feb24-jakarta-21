@@ -97,7 +97,7 @@ header .select-btn .arrow-dwn {
 }
 .select .list-items {
   position: absolute;
-  width: 100%;
+  width: 150px;
   max-height: 400px;
   margin-top: 5px;
   border-radius: 5px;
@@ -139,6 +139,86 @@ header .select-btn .arrow-dwn {
   transition: var(--tran-03);
 }
 
+
+/* ========== Dashboard Analys ========== */
+/* ========== Dashboard Analys ========== */
+.analys {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 2rem;
+  justify-items: center;
+}
+.analys .analys-sales {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--card-color);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.analys-sales .sales-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.analys-sales .sales-icon i {
+  font-size: 2rem;
+  color: var(--text-color);
+}
+.analys-sales .sales-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+}
+.analys-sales .sales-text h3 {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+.analys-sales .sales-text h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* ========== Dashboard Chart ========== */
+/* ========== Dashboard Chart ========== */
+.chart {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "top-selling least-selling best-size"
+    "average-sales sales-hour sales-hour"
+    "daily-trends daily-trends least-popular";
+}
+.chart-item:nth-child(1) { grid-area: top-selling }
+.chart-item:nth-child(2) { grid-area: least-selling }
+.chart-item:nth-child(3) { grid-area: best-size }
+.chart-item:nth-child(4) { grid-area: average-sales }
+.chart-item:nth-child(5) { grid-area: sales-hour }
+.chart-item:nth-child(6) { grid-area: daily-trends }
+.chart-item:nth-child(7) { grid-area: least-popular }
+.chart .chart-item {
+  background-color: var(--card-color);
+  padding: 20px;
+  border-radius: 5px;
+  height: 200px;
+}
+.chart .chart-item p {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+
 /* ========== Footer ========== */
 /* ========== Footer ========== */
 footer {
@@ -169,7 +249,6 @@ footer .footer-card h3 {
     width: 142px;
   }
 }
-
 @media screen and (max-width: 992px) {
   .container-dashboard {
     max-width: 992px;
@@ -180,8 +259,16 @@ footer .footer-card h3 {
     align-items: center;
     gap: 10px;
   }
+  .chart {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "top-selling least-selling"
+      "best-size average-sales"
+      "sales-hour sales-hour"
+      "daily-trends daily-trends"
+      "least-popular least-popular";
+  }
 }
-
 @media screen and (max-width: 768px) {
   html {
     font-size: 12px !important;
@@ -203,14 +290,37 @@ footer .footer-card h3 {
   header .select-dropdown .select-btn {
     width: 100%;
   }
+  .analys .analys-sales {
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+  .chart {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "top-selling"
+      "least-selling"
+      "best-size"
+      "average-sales"
+      "sales-hour"
+      "daily-trends"
+      "least-popular";
+  }
 }
-
 @media screen and (max-width: 576px) {
   .container-dashboard {
     max-width: 576px;
   }
+  .analys {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .analys .analys-sales {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
 }
-
 @media screen and (max-width: 400px) {
   header .select {
     display: grid;

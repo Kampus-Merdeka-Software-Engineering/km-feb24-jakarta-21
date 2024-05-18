@@ -203,7 +203,8 @@ body.dark .mode .sun-moon i.moon {
 }
 
 
-/* Hamburger Menu */
+/* ========== Hamburger Menu ========== */
+/* ========== Hamburger Menu ========== */
 .hamburger {
   width: 100%;
   display: none;
@@ -212,7 +213,6 @@ body.dark .mode .sun-moon i.moon {
   margin-bottom: 10px;
   box-shadow: 0.5px 0 5px var(--text-color);
 }
-
 .nav-hamburger {
   border-radius: 5px;
   background-color: var(--toggle-color);
@@ -222,7 +222,6 @@ body.dark .mode .sun-moon i.moon {
   align-items: center;
   padding: 2px;
 }
-
 .nav-hamburger i {
   font-size: 2.5rem;
   color: #fff;
