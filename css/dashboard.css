@@ -147,7 +147,7 @@ header .select-btn .arrow-dwn {
 .analys {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  gap: 16px;
   margin-top: 2rem;
   justify-items: center;
 }
@@ -194,25 +194,21 @@ header .select-btn .arrow-dwn {
 .chart {
   margin-top: 1.5rem;
   display: grid;
-  gap: 15px;
-  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
-    "top-selling least-selling best-size"
-    "average-sales sales-hour sales-hour"
-    "daily-trends daily-trends least-popular";
+  "best-size average-sales"
+  "least-popular least-popular";
 }
-.chart-item:nth-child(1) { grid-area: top-selling }
-.chart-item:nth-child(2) { grid-area: least-selling }
-.chart-item:nth-child(3) { grid-area: best-size }
-.chart-item:nth-child(4) { grid-area: average-sales }
-.chart-item:nth-child(5) { grid-area: sales-hour }
-.chart-item:nth-child(6) { grid-area: daily-trends }
-.chart-item:nth-child(7) { grid-area: least-popular }
+
+.chart-item:nth-child(1) { grid-area: best-size; }
+.chart-item:nth-child(2) { grid-area: average-sales; }
+.chart-item:nth-child(3) { grid-area: least-popular; }
 .chart .chart-item {
   background-color: var(--card-color);
-  padding: 20px;
+  padding: 16px;
   border-radius: 15px;
-  height: 200px;
+  height: 230px;
 }
 .chart .chart-item p {
   font-size: 1rem;
@@ -261,15 +257,6 @@ footer .footer-card h3 {
     align-items: center;
     gap: 10px;
   }
-  .chart {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas:
-      "top-selling least-selling"
-      "best-size average-sales"
-      "sales-hour sales-hour"
-      "daily-trends daily-trends"
-      "least-popular least-popular";
-  }
 }
 @media screen and (max-width: 768px) {
   html {
@@ -300,12 +287,8 @@ footer .footer-card h3 {
   .chart {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "top-selling"
-      "least-selling"
       "best-size"
       "average-sales"
-      "sales-hour"
-      "daily-trends"
       "least-popular";
   }
 }
