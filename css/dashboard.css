@@ -108,7 +108,6 @@ header .select-btn .arrow-dwn {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   display: none;
   overflow-y: scroll;
-  transition: var(--tran-05);
 }
 .select .list-items .item {
   display: flex;
