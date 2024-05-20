@@ -1,5 +1,4 @@
-// =============== FILTER DASHBOARD ===============
-// =============== FILTER DASHBOARD ===============
+// =============== OPEN DROPDOWN FILTER ===============
 const selectBtns = document.querySelectorAll(".select-btn");
 
 selectBtns.forEach((selectBtn) => {
@@ -16,18 +15,19 @@ selectBtns.forEach((selectBtn) => {
   });
 });
 
+// =============== FILTER PIZZA TYPE ===============
 fetch("./data.json")
   .then((response) => response.json())
   .then((data) => {
-    const pizzaList = document.querySelector(".list-items");
+    const pizzaTypeFilter = document.querySelector(".pizza-type");
     const pizzas = [];
-    console.log(data)
+    // console.log(data)
 
     data.forEach((item) => {
       const pizza = item["Pizza Type ID"];
       if (pizzas.indexOf(pizza) === -1) {
         pizzas.push(pizza);
-        console.log(pizza)
+        // console.log(pizza)
 
         const listPizza = document.createElement("li");
         listPizza.className = "item";
@@ -35,7 +35,81 @@ fetch("./data.json")
                 <input type="checkbox" id="${pizza}" />
                 <label for="${pizza}">${pizza}</label>
             `;
-        pizzaList.appendChild(listPizza);
+        pizzaTypeFilter.appendChild(listPizza);
+
+        const checkbox = listPizza.querySelector(`#${pizza}`);
+        checkbox.addEventListener("change", function () {
+          if (this.checked) {
+            console.log(this.id);
+          }
+        });
       }
     });
   });
+
+// =============== FILTER CATEGORY ===============
+fetch("./data.json")
+  .then((response) => response.json())
+  .then((data) => {
+    const pizzaCategoryFilter = document.querySelector(".pizza-category");
+    const pizzas = [];
+    // console.log(data)
+
+    data.forEach((item) => {
+      const pizza = item["Category"];
+      if (pizzas.indexOf(pizza) === -1) {
+        pizzas.push(pizza);
+        // console.log(pizza)
+
+        const listPizza = document.createElement("li");
+        listPizza.className = "item";
+        listPizza.innerHTML = `
+                <input type="checkbox" id="${pizza}" />
+                <label for="${pizza}">${pizza}</label>
+            `;
+        pizzaCategoryFilter.appendChild(listPizza);
+
+        const checkbox = listPizza.querySelector(`#${pizza}`);
+        checkbox.addEventListener("change", function () {
+          if (this.checked) {
+            console.log(this.id);
+          }
+        });
+      }
+    });
+  });
+
+// =============== FILTER SIZE ===============
+fetch("./data.json")
+  .then((response) => response.json())
+  .then((data) => {
+    const pizzaSizeFilter = document.querySelector(".pizza-size");
+    const pizzas = [];
+    // console.log(data)
+
+    data.forEach((item) => {
+      const pizza = item["Size"];
+      if (pizzas.indexOf(pizza) === -1) {
+        pizzas.push(pizza);
+        // console.log(pizza)
+
+        const listPizza = document.createElement("li");
+        listPizza.className = "item";
+        listPizza.innerHTML = `
+                <input type="checkbox" id="${pizza}" />
+                <label for="${pizza}">${pizza}</label>
+            `;
+        pizzaSizeFilter.appendChild(listPizza);
+
+        const checkbox = listPizza.querySelector(`#${pizza}`);
+        checkbox.addEventListener("change", function () {
+          if (this.checked) {
+            console.log(this.id);
+          }
+        });
+      }
+    });
+  });
+
+// =============== FILTER PRICE RANGE ===============
+
