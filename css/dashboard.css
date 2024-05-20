@@ -17,6 +17,7 @@ html {
   --text-color: #000;
   --card-filter: #fff;
   --card-color: #fff;
+  --hover-color: #e4e9f7;
 
   /* ====== Transition ====== */
   --tran-03: all 0.2s ease;
@@ -38,6 +39,7 @@ body.dark {
   --text-color: #fff;
   --card-filter: #d3b786;
   --card-color: #2c2f38;
+  --hover-color: #2c2f38;
 }
 
 .container-dashboard {
@@ -106,6 +108,7 @@ header .select-btn .arrow-dwn {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   display: none;
   overflow-y: scroll;
+  transition: var(--tran-05);
 }
 .select .list-items .item {
   display: flex;
@@ -120,7 +123,7 @@ header .select-btn .arrow-dwn {
   background-color: var(--card-filter);
 }
 .select .list-items .item:hover {
-  background-color: var(--body-color);
+  background-color: var(--hover-color);
 }
 .select .list-items .item label {
   font-size: 1rem;
@@ -145,7 +148,7 @@ header .select-btn .arrow-dwn {
 .analys {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 15px;
   margin-top: 2rem;
   justify-items: center;
 }
@@ -156,7 +159,7 @@ header .select-btn .arrow-dwn {
   align-items: center;
   justify-content: space-around;
   background-color: var(--card-color);
-  border-radius: 5px;
+  border-radius: 15px;
   box-sizing: border-box;
 }
 .analys-sales .sales-icon {
@@ -192,7 +195,7 @@ header .select-btn .arrow-dwn {
 .chart {
   margin-top: 1.5rem;
   display: grid;
-  gap: 10px;
+  gap: 15px;
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
     "top-selling least-selling best-size"
@@ -209,7 +212,7 @@ header .select-btn .arrow-dwn {
 .chart .chart-item {
   background-color: var(--card-color);
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 15px;
   height: 200px;
 }
 .chart .chart-item p {
@@ -240,7 +243,7 @@ footer .footer-card h3 {
 
 @media screen and (max-width: 1200px) {
   .container-dashboard {
-    /* max-width: 1140px; */
+    
   }
   header .select-dropdown .select-btn {
     width: 142px;
