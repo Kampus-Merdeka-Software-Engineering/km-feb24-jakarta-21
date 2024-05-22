@@ -15,60 +15,11 @@ selectBtns.forEach((selectBtn) => {
   });
 });
 
-// Fetch the data and create filters
-// fetch("./data.json")
-// .then((response) => response.json())
-// .then((data) => {
-//   createFilter(data, "Pizza Type ID", ".pizza-type");
-//   createFilter(data, "Category", ".pizza-category");
-//   createFilter(data, "Size", ".pizza-size");
-// });
-
-// function createFilter(data, attribute, containerSelector) {
-//   const container = document.querySelector(containerSelector);
-//   const pizzas = [];
-  
-//   data.forEach((item) => {
-//     const pizza = item[attribute];
-//     if (pizzas.indexOf(pizza) === -1) {
-//       pizzas.push(pizza);
-
-//       const listItem = document.createElement("li");
-//       listItem.className = "item";
-//       listItem.innerHTML = `
-//         <input type="checkbox" id="${pizza}" />
-//         <label for="${pizza}">${pizza}</label>
-//       `;
-//       container.appendChild(listItem);
-
-//       const checkbox = listItem.querySelector(`#${pizza}`);
-//       checkbox.addEventListener("change", function () {
-//         if (this.checked) {
-//           console.log(`add : ${this.id}`)
-//         } else {
-//           console.log(`delete : ${this.id}`)
-//         }
-//       });
-//     }
-//   });
-// }
-
-// function displayData(data) {
-//   const totalSales = data.reduce((acc, item) => acc + (item['Price'] * item['Quantity']), 0);
-//   const numOrders = [...new Set(data.map(item => item['Order ID']))].length;
-//   const averageSales = totalSales / numOrders;
-
-//   document.querySelector(".total-sales h1").textContent = `Total Sales: ${totalSales.toLocaleString()}`;
-//   document.querySelector(".num-of-orders h1").textContent = `Number of Orders: ${numOrders.toLocaleString()}`;
-//   document.querySelector(".average-sales h1").textContent = `Average Sales: ${averageSales.toLocaleString()}`;
-// }
-
-
 // // =============== FILTER PRICE RANGE ===============
 // const priceRanges = [
-//   { PriceRange: "$9.75 - $13.99" }, 
-//   { PriceRange: "$22 - $25.50" }, 
-//   { PriceRange: "$18 - $21.99" }, 
+//   { PriceRange: "$9.75 - $13.99" },
+//   { PriceRange: "$22 - $25.50" },
+//   { PriceRange: "$18 - $21.99" },
 //   { PriceRange: "$14 - $17.99" }
 // ];
 
@@ -119,8 +70,6 @@ selectBtns.forEach((selectBtn) => {
 //   })
 //   .catch((error) => console.error("Error fetching data:", error));
 
-
-
 fetch("./data.json")
   .then((response) => response.json())
   .then((data) => {
@@ -128,8 +77,42 @@ fetch("./data.json")
     createFilter(data, "Category", ".pizza-category");
     createFilter(data, "Size", ".pizza-size");
 
-    // Tambahkan event listener untuk mendeteksi perubahan pada filter
-    document.querySelectorAll(".item input[type=checkbox]").forEach((checkbox) => {
+    // Membuat Button SELECT ALL di Pizza Type
+    const selectAllButton = document.createElement("button");
+    selectAllButton.textContent = "Select All";
+    selectAllButton.className = "select-all";
+    document.querySelector(".pizza-type").prepend(selectAllButton);
+
+    // Menambahkan Event buat button Select ALL
+    let selectAllState = false;
+    selectAllButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      selectAllState = !selectAllState;
+      document.querySelectorAll(".pizza-type .item input[type=checkbox]").forEach((checkbox) => {
+        checkbox.checked = selectAllState;
+      });
+
+      if (!selectAllState) {
+        // Jika semua checkbox di-uncheck, tampilkan data kosong
+        displayData([]);
+      } else {
+        const selectedFilters = getSelectedFilters();
+        updateFilters(data, selectedFilters);
+        const filteredData = data.filter(filterData(selectedFilters));
+        displayData(filteredData);
+      }
+    });
+
+    document.querySelectorAll(".pizza-type .item input[type=checkbox]").forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        const selectedFilters = getSelectedFilters();
+        updateFilters(data, selectedFilters);
+        const filteredData = data.filter(filterData(selectedFilters));
+        displayData(filteredData);
+      });
+    });
+
+    document.querySelectorAll(".pizza-category .item input[type=checkbox], .pizza-size .item input[type=checkbox]").forEach((checkbox) => {
       checkbox.addEventListener("change", () => {
         const selectedFilters = getSelectedFilters();
         const filteredData = data.filter(filterData(selectedFilters));
@@ -137,27 +120,58 @@ fetch("./data.json")
       });
     });
 
-    // Tampilkan nilai awal sebagai 0
+    // Menampilkan Data awal nya 0
     displayData([]);
   });
 
 function createFilter(data, attribute, containerSelector) {
   const container = document.querySelector(containerSelector);
-  const pizzas = [];
+  const items = [];
 
   data.forEach((item) => {
-    const pizza = item[attribute];
-    if (pizzas.indexOf(pizza) === -1) {
-      pizzas.push(pizza);
+    const value = item[attribute];
+    if (items.indexOf(value) === -1) {
+      items.push(value);
 
       const listItem = document.createElement("li");
       listItem.className = "item";
-      listItem.setAttribute("data-attribute", attribute);  // Menambahkan atribut data-attribute
+      listItem.setAttribute("data-attribute", attribute);
       listItem.innerHTML = `
-        <input type="checkbox" id="${pizza}" />
-        <label for="${pizza}">${pizza}</label>
-      `;
+          <input type="checkbox" id="${value}" />
+          <label for="${value}">${value}</label>
+        `;
       container.appendChild(listItem);
+    }
+  });
+}
+
+function updateFilters(data, selectedFilters) {
+  const pizzaTypes = selectedFilters["Pizza Type ID"];
+  const categories = new Set();
+  const sizes = new Set();
+
+  data.forEach((item) => {
+    if (!pizzaTypes.length || pizzaTypes.includes(item["Pizza Type ID"])) {
+      categories.add(item["Category"]);
+      sizes.add(item["Size"]);
+    }
+  });
+
+  updateFilterOptions(".pizza-category", categories, pizzaTypes.length > 0);
+  updateFilterOptions(".pizza-size", sizes, pizzaTypes.length > 0);
+}
+
+function updateFilterOptions(containerSelector, options, shouldCheck) {
+  const container = document.querySelector(containerSelector);
+  container.querySelectorAll(".item").forEach((item) => {
+    const value = item.querySelector("input").id;
+    const checkbox = item.querySelector("input");
+    if (options.has(value)) {
+      item.style.display = "";
+      checkbox.checked = shouldCheck;
+    } else {
+      item.style.display = "none";
+      checkbox.checked = false;
     }
   });
 }
@@ -188,13 +202,28 @@ function filterData(selectedFilters) {
 }
 
 function displayData(data) {
-  const totalSales = data.reduce((acc, item) => {
-    const price = parseFloat(item['Price'].replace('$', ''));
-    return acc + (price * item['Quantity']);
-  }, 0);
+  // Total Sales = price * quantity
+  let totalSales = 0;
+  if (data.length > 0) {
+    totalSales = data.reduce((acc, item) => {
+      const price = parseFloat(item["Price"].replace("$", ""));
+      return acc + price * item["Quantity"];
+    }, 0);
+  }
 
-  const numOrders = data.length > 0 ? new Set(data.map(item => item['Order ID'])).size : 0;
-  const averageSales = numOrders > 0 ? totalSales / numOrders : 0;
+  // Num of Order = count_distinct(Order_id)
+  let numOrders = 0;
+  if (data.length > 0) {
+    const orderIds = data.map((item) => item["Order ID"]);
+    const uniqueOrderIds = new Set(orderIds);
+    numOrders = uniqueOrderIds.size;
+  }
+
+  // AVG Sales = price * quantity / count_distinct(Order_id)
+  let averageSales = 0;
+  if (numOrders > 0) {
+    averageSales = totalSales / numOrders;
+  }
 
   document.querySelector(".total-sales h1").textContent = `$${totalSales.toLocaleString()}`;
   document.querySelector(".num-of-orders h1").textContent = `$${numOrders.toLocaleString()}`;
