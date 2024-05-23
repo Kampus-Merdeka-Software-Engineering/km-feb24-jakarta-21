@@ -92,27 +92,44 @@ fetch("./data.json")
         checkbox.checked = selectAllState;
       });
 
-      const selectedFilters = getSelectedFilters();
-      updateFilters(data, selectedFilters);
-      const filteredData = data.filter(filterData(selectedFilters));
-      displayData(filteredData);
+      if (!selectAllState) {
+        // Jika semua checkbox di-uncheck, tampilkan data kosong
+        displayData([]);
+      } else {
+        const selectedFilters = getSelectedFilters();
+        updateFilters(data, selectedFilters);
+        const filteredData = data.filter(filterData(selectedFilters));
+        displayData(filteredData);
+      }
     });
 
     document.querySelectorAll(".pizza-type .item input[type=checkbox]").forEach((checkbox) => {
       checkbox.addEventListener("change", () => {
         const selectedFilters = getSelectedFilters();
         updateFilters(data, selectedFilters);
+        // const filteredData = data.filter(filterData(selectedFilters));
+        // displayData(filteredData);
+        // console.log(filteredData);
         const filteredData = data.filter(filterData(selectedFilters));
-        displayData(filteredData);
-        console.log(filteredData);
+        if (Object.values(selectedFilters).every((filter) => filter.length === 0)) {
+          displayData([]); // Tampilkan data kosong jika tidak ada yang di ceklis
+        } else {
+          displayData(filteredData);
+        }
       });
     });
 
     document.querySelectorAll(".pizza-category .item input[type=checkbox], .pizza-size .item input[type=checkbox]").forEach((checkbox) => {
       checkbox.addEventListener("change", () => {
         const selectedFilters = getSelectedFilters();
+        // const filteredData = data.filter(filterData(selectedFilters));
+        // displayData(filteredData);
         const filteredData = data.filter(filterData(selectedFilters));
-        displayData(filteredData);
+        if (Object.values(selectedFilters).every((filter) => filter.length === 0)) {
+          displayData([]); // Tampilkan data kosong jika tidak ada yang di ceklis
+        } else {
+          displayData(filteredData);
+        }
       });
     });
 
@@ -230,58 +247,57 @@ function displayData(data) {
   createBestSellingPizzaSizeChart(data);
 }
 
-
 let bestSellingPizzaSizeChart;
 
 function createBestSellingPizzaSizeChart(data) {
-  const ctx = document.getElementById('bestSellingPizzaSizeChart').getContext('2d');
+  const ctx = document.getElementById("bestSellingPizzaSizeChart").getContext("2d");
 
   if (bestSellingPizzaSizeChart) {
-    bestSellingPizzaSizeChart.destroy();  // Destroy previous chart instance if it exists
+    bestSellingPizzaSizeChart.destroy(); // Destroy previous chart instance if it exists
   }
 
-  const pizzaSizes = [...new Set(data.map(item => item.Size))];
-  const sizeSales = pizzaSizes.map(size => {
-    return data
-      .filter(item => item.Size === size)
-      .reduce((total, item) => total + (parseFloat(item.Price.replace("$", "")) * item.Quantity), 0);
+  const pizzaSizes = [...new Set(data.map((item) => item.Size))];
+  const sizeSales = pizzaSizes.map((size) => {
+    return data.filter((item) => item.Size === size).reduce((total, item) => total + parseFloat(item.Price.replace("$", "")) * item.Quantity, 0);
   });
 
   const sizeColors = {
-    "S": "#AF672D",
-    "M": "#D3B786",
-    "L": "#886839",
-    "XL": "#E4B455"
+    S: "#AF672D",
+    M: "#D3B786",
+    L: "#886839",
+    XL: "#E4B455",
   };
 
-  const colors = pizzaSizes.map(size => sizeColors[size] || '#000000'); 
+  const colors = pizzaSizes.map((size) => sizeColors[size] || "#000000");
 
   bestSellingPizzaSizeChart = new Chart(ctx, {
-    type: 'pie',
+    type: "pie",
     data: {
       labels: pizzaSizes,
-      datasets: [{
-        label: 'Total Sales',
-        data: sizeSales,
-        backgroundColor: colors,
-      }]
+      datasets: [
+        {
+          label: "Total Sales",
+          data: sizeSales,
+          backgroundColor: colors,
+        },
+      ],
     },
     options: {
       responsive: true,
       plugins: {
         legend: {
-          position: 'right',
+          position: "right",
         },
         tooltip: {
           callbacks: {
             label: function (context) {
-              const label = context.label || '';
+              const label = context.label || "";
               const value = context.raw || 0;
               const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
               const percentage = ((value / total) * 100).toFixed(2);
               return `${label}: $${value.toFixed(2)} (${percentage}%)`;
-            }
-          }
+            },
+          },
         },
         datalabels: {
           formatter: (value, context) => {
@@ -289,17 +305,17 @@ function createBestSellingPizzaSizeChart(data) {
             const percentage = ((value / total) * 100).toFixed(2);
             return `${percentage}%`;
           },
-          color: '#fff',
+          color: "#fff",
           labels: {
             title: {
               font: {
-                weight: 'bold'
-              }
-            }
-          }
-        }
-      }
+                weight: "bold",
+              },
+            },
+          },
+        },
+      },
     },
-    plugins: [ChartDataLabels]
+    plugins: [ChartDataLabels],
   });
 }
