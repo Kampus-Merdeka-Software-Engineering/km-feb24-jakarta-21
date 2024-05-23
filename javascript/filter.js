@@ -92,15 +92,10 @@ fetch("./data.json")
         checkbox.checked = selectAllState;
       });
 
-      if (!selectAllState) {
-        // Jika semua checkbox di-uncheck, tampilkan data kosong
-        displayData([]);
-      } else {
-        const selectedFilters = getSelectedFilters();
-        updateFilters(data, selectedFilters);
-        const filteredData = data.filter(filterData(selectedFilters));
-        displayData(filteredData);
-      }
+      const selectedFilters = getSelectedFilters();
+      updateFilters(data, selectedFilters);
+      const filteredData = data.filter(filterData(selectedFilters));
+      displayData(filteredData);
     });
 
     document.querySelectorAll(".pizza-type .item input[type=checkbox]").forEach((checkbox) => {
@@ -109,6 +104,7 @@ fetch("./data.json")
         updateFilters(data, selectedFilters);
         const filteredData = data.filter(filterData(selectedFilters));
         displayData(filteredData);
+        console.log(filteredData);
       });
     });
 
@@ -157,18 +153,18 @@ function updateFilters(data, selectedFilters) {
     }
   });
 
-  updateFilterOptions(".pizza-category", categories, pizzaTypes.length > 0);
-  updateFilterOptions(".pizza-size", sizes, pizzaTypes.length > 0);
+  updateFilterOptions(".pizza-category", categories, selectedFilters["Category"]);
+  updateFilterOptions(".pizza-size", sizes, selectedFilters["Size"]);
 }
 
-function updateFilterOptions(containerSelector, options, shouldCheck) {
+function updateFilterOptions(containerSelector, options, selectedOptions) {
   const container = document.querySelector(containerSelector);
   container.querySelectorAll(".item").forEach((item) => {
     const value = item.querySelector("input").id;
     const checkbox = item.querySelector("input");
     if (options.has(value)) {
       item.style.display = "";
-      checkbox.checked = shouldCheck;
+      checkbox.checked = selectedOptions.includes(value);
     } else {
       item.style.display = "none";
       checkbox.checked = false;
@@ -188,6 +184,7 @@ function getSelectedFilters() {
     selectedFilters[attribute].push(checkbox.id);
   });
 
+  console.log(selectedFilters);
   return selectedFilters;
 }
 
@@ -226,6 +223,83 @@ function displayData(data) {
   }
 
   document.querySelector(".total-sales h1").textContent = `$${totalSales.toLocaleString()}`;
-  document.querySelector(".num-of-orders h1").textContent = `$${numOrders.toLocaleString()}`;
-  document.querySelector(".average-sales h1").textContent = `${averageSales.toLocaleString()}`;
+  document.querySelector(".num-of-orders h1").textContent = `${numOrders.toLocaleString()}`;
+  document.querySelector(".average-sales h1").textContent = `$${averageSales.toLocaleString()}`;
+
+  // Update chart
+  createBestSellingPizzaSizeChart(data);
+}
+
+
+let bestSellingPizzaSizeChart;
+
+function createBestSellingPizzaSizeChart(data) {
+  const ctx = document.getElementById('bestSellingPizzaSizeChart').getContext('2d');
+
+  if (bestSellingPizzaSizeChart) {
+    bestSellingPizzaSizeChart.destroy();  // Destroy previous chart instance if it exists
+  }
+
+  const pizzaSizes = [...new Set(data.map(item => item.Size))];
+  const sizeSales = pizzaSizes.map(size => {
+    return data
+      .filter(item => item.Size === size)
+      .reduce((total, item) => total + (parseFloat(item.Price.replace("$", "")) * item.Quantity), 0);
+  });
+
+  const sizeColors = {
+    "S": "#AF672D",
+    "M": "#D3B786",
+    "L": "#886839",
+    "XL": "#E4B455"
+  };
+
+  const colors = pizzaSizes.map(size => sizeColors[size] || '#000000'); 
+
+  bestSellingPizzaSizeChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: pizzaSizes,
+      datasets: [{
+        label: 'Total Sales',
+        data: sizeSales,
+        backgroundColor: colors,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'right',
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              const label = context.label || '';
+              const value = context.raw || 0;
+              const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
+              const percentage = ((value / total) * 100).toFixed(2);
+              return `${label}: $${value.toFixed(2)} (${percentage}%)`;
+            }
+          }
+        },
+        datalabels: {
+          formatter: (value, context) => {
+            const total = context.chart.data.datasets[0].data.reduce((sum, val) => sum + val, 0);
+            const percentage = ((value / total) * 100).toFixed(2);
+            return `${percentage}%`;
+          },
+          color: '#fff',
+          labels: {
+            title: {
+              font: {
+                weight: 'bold'
+              }
+            }
+          }
+        }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
 }
