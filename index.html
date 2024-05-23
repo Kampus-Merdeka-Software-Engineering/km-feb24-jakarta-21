@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
     <link rel="icon" href="../asset/logo-team-21.png" type="image/x-icon" />
 
     <!-- Link Google Font -->
@@ -78,7 +81,7 @@
       <header class="dash-header">
         <h1 class="content-text">Pizza Sales Report</h1>
 
-        <form  class="select">
+        <form action="javascript/filter.js" class="select">
           <div class="select-dropdown">
             <div class="select-btn btn1">
               <span class="btn-text">Pizza Type</span>
@@ -107,17 +110,6 @@
               </span>
             </div>
             <ul class="list-items pizza-size">
-              
-            </ul>
-          </div>
-          <div class="select-dropdown">
-            <div class="select-btn btn4">
-              <span class="btn-text">Price Range</span>
-              <span class="arrow-dwn">
-                <i class="bx bx-chevron-up"></i>
-              </span>
-            </div>
-            <ul class="list-items pizza-pricerange">
               
             </ul>
           </div>
@@ -158,7 +150,14 @@
 
       <section>
         <div class="chart">
-          <div class="chart-item"><p>BEST SELLING PIZZA SIZE</p></div>
+          <div class="chart-item">
+            <div class="chart-text">
+              <p>BEST SELLING PIZZA SIZE</p>
+            </div>
+            <div class="chart-img">
+              <canvas id="bestSellingPizzaSizeChart"></canvas>
+            </div>
+          </div>
           <div class="chart-item"><p>AVERAGE PURCHASED PRICE</p></div>
           <div class="chart-item"><p>DAILY SALES OF LEAST POPULAR PIZZAS</p></div>
         </div>
@@ -173,6 +172,6 @@
 
     <script src="javascript/filter.js"></script>
     <script src="javascript/sidebar.js"></script>
-    <!-- <script src="script.js"></script> -->
+    <!-- <script src="example.js"></script> -->
   </body>
 </html>
