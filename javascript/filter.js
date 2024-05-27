@@ -15,65 +15,10 @@ selectBtns.forEach((selectBtn) => {
   });
 });
 
-// // =============== FILTER PRICE RANGE ===============
-// const priceRanges = [
-//   { PriceRange: "$9.75 - $13.99" },
-//   { PriceRange: "$22 - $25.50" },
-//   { PriceRange: "$18 - $21.99" },
-//   { PriceRange: "$14 - $17.99" }
-// ];
-
-// const pizzaPriceFilter = document.querySelector(".pizza-pricerange");
-
-// fetch("./data.json")
-//   .then((response) => response.json())
-//   .then((data) => {
-//     // Function to determine which price range a price belongs to
-//     function getPriceRange(price) {
-//       const priceValue = parseFloat(price.replace("$", ""));
-//       for (const range of priceRanges) {
-//         const [min, max] = range.PriceRange.replace("$", "").split(" - ").map(Number);
-//         if (priceValue >= min && priceValue <= max) {
-//           return range.PriceRange;
-//         }
-//       }
-//       return null;
-//     }
-//     // Group data by price range
-//     const groupedData = priceRanges.map((range) => {
-//       return {
-//         PriceRange: range.PriceRange,
-//         items: data.filter((item) => getPriceRange(item.Price) === range.PriceRange),
-//       };
-//     });
-
-//     console.log(groupedData)
-
-//     // Create HTML for each price range and add event listener
-//     groupedData.forEach((group) => {
-//       const listPizza = document.createElement("li");
-//       listPizza.className = "item";
-//       listPizza.innerHTML = `
-//         <input type="checkbox" id="${group.PriceRange}" />
-//         <label for="${group.PriceRange}">${group.PriceRange}</label>
-//       `;
-//       pizzaPriceFilter.appendChild(listPizza);
-
-//       // Add event listener inside the loop to correctly reference the current checkbox
-//       const checkbox = listPizza.querySelector(`input[type="checkbox"]`);
-//       checkbox.addEventListener("change", function () {
-//         if (this.checked) {
-//           console.log(this.id);
-//         }
-//       });
-//     });
-//   })
-//   .catch((error) => console.error("Error fetching data:", error));
-
 fetch("./data.json")
   .then((response) => response.json())
   .then((data) => {
-    createFilter(data, "Pizza Type ID", ".pizza-type");
+    createFilter(data, "Name", ".pizza-type");
     createFilter(data, "Category", ".pizza-category");
     createFilter(data, "Size", ".pizza-size");
 
@@ -84,15 +29,15 @@ fetch("./data.json")
     document.querySelector(".pizza-type").prepend(selectAllButton);
 
     // Menambahkan Event buat button Select ALL
-    let selectAllState = false;
+    let selectAllType = false;
     selectAllButton.addEventListener("click", (e) => {
       e.preventDefault();
-      selectAllState = !selectAllState;
+      selectAllType = !selectAllType;
       document.querySelectorAll(".pizza-type .item input[type=checkbox]").forEach((checkbox) => {
-        checkbox.checked = selectAllState;
+        checkbox.checked = selectAllType;
       });
 
-      if (!selectAllState) {
+      if (!selectAllType) {
         // Jika semua checkbox di-uncheck, tampilkan data kosong
         displayData([]);
       } else {
@@ -122,8 +67,6 @@ fetch("./data.json")
     document.querySelectorAll(".pizza-category .item input[type=checkbox], .pizza-size .item input[type=checkbox]").forEach((checkbox) => {
       checkbox.addEventListener("change", () => {
         const selectedFilters = getSelectedFilters();
-        // const filteredData = data.filter(filterData(selectedFilters));
-        // displayData(filteredData);
         const filteredData = data.filter(filterData(selectedFilters));
         if (Object.values(selectedFilters).every((filter) => filter.length === 0)) {
           displayData([]); // Tampilkan data kosong jika tidak ada yang di ceklis
@@ -159,12 +102,12 @@ function createFilter(data, attribute, containerSelector) {
 }
 
 function updateFilters(data, selectedFilters) {
-  const pizzaTypes = selectedFilters["Pizza Type ID"];
+  const pizzaTypes = selectedFilters["Name"];
   const categories = new Set();
   const sizes = new Set();
 
   data.forEach((item) => {
-    if (!pizzaTypes.length || pizzaTypes.includes(item["Pizza Type ID"])) {
+    if (!pizzaTypes.length || pizzaTypes.includes(item["Name"])) {
       categories.add(item["Category"]);
       sizes.add(item["Size"]);
     }
@@ -191,7 +134,7 @@ function updateFilterOptions(containerSelector, options, selectedOptions) {
 
 function getSelectedFilters() {
   const selectedFilters = {
-    "Pizza Type ID": [],
+    "Name": [],
     Category: [],
     Size: [],
   };
@@ -208,7 +151,7 @@ function getSelectedFilters() {
 function filterData(selectedFilters) {
   return (item) => {
     return (
-      (!selectedFilters["Pizza Type ID"].length || selectedFilters["Pizza Type ID"].includes(item["Pizza Type ID"])) &&
+      (!selectedFilters["Name"].length || selectedFilters["Name"].includes(item["Name"])) &&
       (!selectedFilters["Category"].length || selectedFilters["Category"].includes(item["Category"])) &&
       (!selectedFilters["Size"].length || selectedFilters["Size"].includes(item["Size"]))
     );
@@ -245,6 +188,8 @@ function displayData(data) {
 
   // Update chart
   createBestSellingPizzaSizeChart(data);
+  createAveragePurchasedPriceChart(data);
+  createDailyPizzaSalesTrendChart(data);
 }
 
 let bestSellingPizzaSizeChart;
@@ -319,3 +264,127 @@ function createBestSellingPizzaSizeChart(data) {
     plugins: [ChartDataLabels],
   });
 }
+
+let averagePurchasedPriceChart;
+
+function createAveragePurchasedPriceChart(data) {
+  const ctx = document.getElementById('averagePurchasedPriceChart').getContext('2d');
+
+  if (averagePurchasedPriceChart) {
+    averagePurchasedPriceChart.destroy();
+  }
+
+  const priceRanges = {
+    '$9.75 - $13.99': { min: 9.75, max: 13.99 },
+    '$14 - $17.99': { min: 14, max: 17.99 },
+    '$18 - $21.99': { min: 18, max: 21.99 },
+    '$22 - $25.50': { min: 22, max: 25.50 }
+  };
+
+  const rangeQuantities = {
+    '$9.75 - $13.99': 0,
+    '$14 - $17.99': 0,
+    '$18 - $21.99': 0,
+    '$22 - $25.50': 0
+  };
+
+  data.forEach(item => {
+    const price = parseFloat(item["Price"].replace("$", ""));
+    for (const range in priceRanges) {
+      if (price >= priceRanges[range].min && price <= priceRanges[range].max) {
+        rangeQuantities[range] += item.Quantity;
+        break;
+      }
+    }
+  });
+
+  const labels = Object.keys(rangeQuantities);
+  const quantities = Object.values(rangeQuantities);
+
+  // Hapus kategori 'Other' jika tidak ada nilai di dalamnya
+  const otherIndex = labels.indexOf('Other');
+  if (otherIndex !== -1 && quantities[otherIndex] === 0) {
+    labels.splice(otherIndex, 1);
+    quantities.splice(otherIndex, 1);
+  }
+
+  let =tickColor = '#000';
+  if (document.body.classList.contains('dark')) {
+    tickColor = '#fff';
+  } 
+
+  averagePurchasedPriceChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Quantity',
+        data: quantities,
+        backgroundColor: '#E4B455',
+        borderColor: 'transparent', // Remove border from bar chart
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return `${context.label}: ${context.raw.toLocaleString()}`;
+            }
+          }
+        },
+        datalabels: {
+          color : '#fff',
+          anchor: 'center',
+          align: 'center',
+          formatter: function (value) {
+            return value.toLocaleString();
+          },
+          font : {
+            weight: 'bold'
+          },
+        }
+      },
+      scales: {
+        x: {
+          title: {
+            // color : '#fff',
+            // display: true,
+            // text: 'Price Range',
+          },
+          ticks: {
+            color: tickColor, // Set color of x-axis ticks to white
+          },
+          grid: {
+            display: false, // Hide x-axis grid lines
+          }
+        },
+        y: {
+          title: {
+            // color : '#fff',
+            // display: true,
+            // text: 'Quantity',
+          },
+          ticks: {
+            stepSize: 5000,
+            beginAtZero: true,
+            color : tickColor,
+            callback: function(value) {
+              return value.toLocaleString();
+            }
+          },
+          grid: {
+            display: false, // Hide x-axis grid lines
+          }
+        }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+}
+
