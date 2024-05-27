@@ -100,7 +100,7 @@ header .select-btn .arrow-dwn {
 .select .list-items {
   position: absolute;
   width: 150px;
-  max-height: 300px;
+  max-height: 280px;
   margin-top: 5px;
   border-radius: 5px;
   padding: 5px;
@@ -109,6 +109,23 @@ header .select-btn .arrow-dwn {
   display: none;
   overflow-y: scroll;
 }
+.select .pizza-type {
+  width: 350px;
+}
+.select .list-items .select-all {
+  width: 100px;
+  padding: 4px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  margin: 5px 5px;
+  color: #fff;
+  background-color: #886839;
+}
+.select .list-items .select-all:hover {
+  cursor: pointer;
+}
+
 .select .list-items .item {
   display: flex;
   width: 100%;
@@ -198,25 +215,28 @@ header .select-btn .arrow-dwn {
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
   "best-size average-sales"
-  "least-popular least-popular";
+  "least-popular daily-pizza-sales";
 }
 
 .chart-item:nth-child(1) { grid-area: best-size; }
 .chart-item:nth-child(2) { grid-area: average-sales; }
 .chart-item:nth-child(3) { grid-area: least-popular; }
+.chart-item:nth-child(4) { grid-area: daily-pizza-sales; }
 .chart .chart-item {
   background-color: var(--card-color);
   padding: 20px 30px;
   border-radius: 15px;
-  height: 400px;
+  height: 380px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  box-sizing: border-box;
 }
 .chart .chart-item .chart-img {
   width: 100%;
-  height: 100%;
+  height: 90%;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 .chart .chart-item p {
@@ -280,6 +300,9 @@ footer .footer-card h3 {
   }
   header .select-dropdown .select-btn {
     width: 100%;
+  }
+  .select .pizza-type {
+    width: 300px;
   }
   .analys .analys-sales {
     display: flex;
