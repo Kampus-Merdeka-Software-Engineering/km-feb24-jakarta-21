@@ -134,7 +134,7 @@ function updateFilterOptions(containerSelector, options, selectedOptions) {
 
 function getSelectedFilters() {
   const selectedFilters = {
-    "Name": [],
+    Name: [],
     Category: [],
     Size: [],
   };
@@ -268,27 +268,27 @@ function createBestSellingPizzaSizeChart(data) {
 let averagePurchasedPriceChart;
 
 function createAveragePurchasedPriceChart(data) {
-  const ctx = document.getElementById('averagePurchasedPriceChart').getContext('2d');
+  const ctx = document.getElementById("averagePurchasedPriceChart").getContext("2d");
 
   if (averagePurchasedPriceChart) {
     averagePurchasedPriceChart.destroy();
   }
 
   const priceRanges = {
-    '$9.75 - $13.99': { min: 9.75, max: 13.99 },
-    '$14 - $17.99': { min: 14, max: 17.99 },
-    '$18 - $21.99': { min: 18, max: 21.99 },
-    '$22 - $25.50': { min: 22, max: 25.50 }
+    "$9.75 - $13.99": { min: 9.75, max: 13.99 },
+    "$14 - $17.99": { min: 14, max: 17.99 },
+    "$18 - $21.99": { min: 18, max: 21.99 },
+    "$22 - $25.50": { min: 22, max: 25.5 },
   };
 
   const rangeQuantities = {
-    '$9.75 - $13.99': 0,
-    '$14 - $17.99': 0,
-    '$18 - $21.99': 0,
-    '$22 - $25.50': 0
+    "$9.75 - $13.99": 0,
+    "$14 - $17.99": 0,
+    "$18 - $21.99": 0,
+    "$22 - $25.50": 0,
   };
 
-  data.forEach(item => {
+  data.forEach((item) => {
     const price = parseFloat(item["Price"].replace("$", ""));
     for (const range in priceRanges) {
       if (price >= priceRanges[range].min && price <= priceRanges[range].max) {
@@ -302,28 +302,30 @@ function createAveragePurchasedPriceChart(data) {
   const quantities = Object.values(rangeQuantities);
 
   // Hapus kategori 'Other' jika tidak ada nilai di dalamnya
-  const otherIndex = labels.indexOf('Other');
+  const otherIndex = labels.indexOf("Other");
   if (otherIndex !== -1 && quantities[otherIndex] === 0) {
     labels.splice(otherIndex, 1);
     quantities.splice(otherIndex, 1);
   }
 
-  let =tickColor = '#000';
-  if (document.body.classList.contains('dark')) {
-    tickColor = '#fff';
-  } 
+  let = tickColor = "#000";
+  if (document.body.classList.contains("dark")) {
+    tickColor = "#fff";
+  }
 
   averagePurchasedPriceChart = new Chart(ctx, {
-    type: 'bar',
+    type: "bar",
     data: {
       labels: labels,
-      datasets: [{
-        label: 'Quantity',
-        data: quantities,
-        backgroundColor: '#E4B455',
-        borderColor: 'transparent', // Remove border from bar chart
-        borderWidth: 0
-      }]
+      datasets: [
+        {
+          label: "Quantity",
+          data: quantities,
+          backgroundColor: "#E4B455",
+          borderColor: "transparent", // Remove border from bar chart
+          borderWidth: 0,
+        },
+      ],
     },
     options: {
       responsive: true,
@@ -335,20 +337,20 @@ function createAveragePurchasedPriceChart(data) {
           callbacks: {
             label: function (context) {
               return `${context.label}: ${context.raw.toLocaleString()}`;
-            }
-          }
+            },
+          },
         },
         datalabels: {
-          color : '#fff',
-          anchor: 'center',
-          align: 'center',
+          color: "#fff",
+          anchor: "center",
+          align: "center",
           formatter: function (value) {
             return value.toLocaleString();
           },
-          font : {
-            weight: 'bold'
+          font: {
+            weight: "bold",
           },
-        }
+        },
       },
       scales: {
         x: {
@@ -362,7 +364,7 @@ function createAveragePurchasedPriceChart(data) {
           },
           grid: {
             display: false, // Hide x-axis grid lines
-          }
+          },
         },
         y: {
           title: {
@@ -373,18 +375,123 @@ function createAveragePurchasedPriceChart(data) {
           ticks: {
             stepSize: 5000,
             beginAtZero: true,
-            color : tickColor,
-            callback: function(value) {
+            color: tickColor,
+            callback: function (value) {
               return value.toLocaleString();
-            }
+            },
           },
           grid: {
             display: false, // Hide x-axis grid lines
-          }
-        }
-      }
+          },
+        },
+      },
     },
-    plugins: [ChartDataLabels]
+    plugins: [ChartDataLabels],
   });
 }
 
+let dailyPizzaSalesTrendChart;
+
+function createDailyPizzaSalesTrendChart(data) {
+  const ctx = document.getElementById("dailyPizzaSalesTrendChart").getContext("2d");
+
+  if (dailyPizzaSalesTrendChart) {
+    dailyPizzaSalesTrendChart.destroy();
+  }
+
+  // Process data to get daily sales trend
+  const dailySales = data.reduce((acc, item) => {
+    const day = item["Day"];
+    const price = parseFloat(item["Price"].replace("$", ""));
+    if (!acc[day]) {
+      acc[day] = 0;
+    }
+    acc[day] += price * item.Quantity;
+    return acc;
+  }, {});
+
+  const labels = Object.keys(dailySales).sort();
+  const sales = labels.map((day) => dailySales[day]);
+
+  let tickColor = "#000";
+  if (document.body.classList.contains("dark")) {
+    tickColor = "#fff";
+  }
+
+  dailyPizzaSalesTrendChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Total Sales ($)",
+          data: sales,
+          backgroundColor: "transparent",
+          borderColor: "#E4B455",
+          borderWidth: 2,
+          fill: true,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return `${context.label}: $${context.raw.toLocaleString()}`;
+            },
+          },
+        },
+        datalabels: {
+          color: tickColor,
+          anchor: "end",
+          align: "end",
+          formatter: function (value) {
+            return `$${value.toLocaleString()}`;
+          },
+          font: {
+            weight: "bold",
+          },
+        },
+      },
+      scales: {
+        x: {
+          // title: {
+          //   display: true,
+          //   text: 'Day',
+          //   color: tickColor
+          // },
+          ticks: {
+            color: tickColor,
+          },
+          grid: {
+            display: false,
+          },
+        },
+        y: {
+          // title: {
+          //   display: true,
+          //   text: 'Total Sales ($)',
+          //   color: tickColor
+          // },
+          ticks: {
+            stepSize: 50000, // Set step size to 50,000
+            beginAtZero: true,
+            color: tickColor,
+            callback: function (value) {
+              return `$${value.toLocaleString()}`;
+            },
+          },
+          grid: {
+            display: false,
+          },
+        },
+      },
+    },
+    plugins: [ChartDataLabels],
+  });
+}
