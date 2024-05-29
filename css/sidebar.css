@@ -233,7 +233,7 @@ body.dark .mode .sun-moon i.moon {
     font-size: 12px !important;
   }
   .sidebar.close-sidebar {
-    opacity: 0;
+    display: none;
   }
   .sidebar header .toggle {
     display: none;
