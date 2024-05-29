@@ -212,32 +212,40 @@ header .select-btn .arrow-dwn {
   margin-top: 1.5rem;
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-template-areas:
-  "best-size average-sales"
-  "least-popular daily-pizza-sales";
+  "tabel-1 tabel-1 tabel-2 tabel-2 best-size"
+  "avg-purchased avg-purchased daily-sales daily-sales daily-sales";
 }
-
-.chart-item:nth-child(1) { grid-area: best-size; }
-.chart-item:nth-child(2) { grid-area: average-sales; }
-.chart-item:nth-child(3) { grid-area: least-popular; }
-.chart-item:nth-child(4) { grid-area: daily-pizza-sales; }
+.chart-item:nth-child(1) { grid-area: tabel-1; }
+.chart-item:nth-child(2) { grid-area: tabel-2; }
+.chart-item:nth-child(3) { grid-area: best-size; }
+.chart-item:nth-child(4) { grid-area: avg-purchased; }
+.chart-item:nth-child(5) { grid-area: daily-sales; }
 .chart .chart-item {
   background-color: var(--card-color);
-  padding: 20px 30px;
+  padding: 20px 10px;
   border-radius: 15px;
-  height: 380px;
+  height: 360px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-betwen;
+  align-items: center;
   flex-direction: column;
   box-sizing: border-box;
 }
 .chart .chart-item .chart-img {
   width: 100%;
-  height: 90%;
+  height: 95%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.chart .chart-item canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
 }
 .chart .chart-item p {
   font-size: 1rem;
@@ -245,7 +253,31 @@ header .select-btn .arrow-dwn {
   color: var(--text-color);
 }
 
-
+/* ========== Tabel ========== */
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 1rem;
+  width: 80%;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.20);
+}
+.content-table thead tr {
+  background-color: #af672d;
+  color: #fff;
+  text-align: left;
+  font-weight: bold;
+}
+.content-table th,
+.content-table td {
+  padding: 10px;
+}
+.content-table tbody tr {
+  background-color: #e4b455;
+  color: #fff;
+  border-bottom: 1px solid #dddddd;
+}
 
 /* ========== Footer ========== */
 /* ========== Footer ========== */
@@ -266,8 +298,14 @@ footer .footer-card h3 {
 }
 
 
-@media screen and (max-width: 1200px) {
- 
+@media screen and (max-width: 1350px) {
+  .chart {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "tabel-1 tabel-2"
+      "best-size avg-purchased"
+      "daily-sales daily-sales";
+  }
 }
 @media screen and (max-width: 992px) {
   .container-dashboard {
@@ -278,6 +316,9 @@ footer .footer-card h3 {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+  }
+  .chart .chart-item {
+   max-height: 300px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -312,10 +353,15 @@ footer .footer-card h3 {
   .chart {
     grid-template-columns: 1fr;
     grid-template-areas:
+      "tabel-1"
+      "tabel-2"
       "best-size"
-      "average-sales"
-      "least-popular";
+      "avg-purchased"
+      "daily-sales";
   }
+  .chart .chart-item {
+    max-height: 320px;
+   }
 }
 @media screen and (max-width: 576px) {
   .container-dashboard {

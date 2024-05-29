@@ -86,8 +86,7 @@
                 <i class="bx bx-chevron-up"></i>
               </span>
             </div>
-            <ul class="list-items pizza-type">
-            </ul>
+            <ul class="list-items pizza-type"></ul>
           </div>
           <div class="select-dropdown">
             <div class="select-btn btn2">
@@ -96,8 +95,7 @@
                 <i class="bx bx-chevron-up"></i>
               </span>
             </div>
-            <ul class="list-items pizza-category">
-            </ul>
+            <ul class="list-items pizza-category"></ul>
           </div>
           <div class="select-dropdown">
             <div class="select-btn btn3">
@@ -106,9 +104,7 @@
                 <i class="bx bx-chevron-up"></i>
               </span>
             </div>
-            <ul class="list-items pizza-size">
-              
-            </ul>
+            <ul class="list-items pizza-size"></ul>
           </div>
         </form>
       </header>
@@ -145,8 +141,24 @@
         </div>
       </section>
 
-      <section>
+      <section class="dashboard">
         <div class="chart">
+          <div class="chart-item chart-table">
+            <div class="chart-text">
+              <p>TOP 5 BEST SELLING PIZZA TYPE</p>
+            </div>
+            <div class="chart-img">
+              <canvas id="top5BestSellingPizzaTypeChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-item chart-table">
+            <div class="chart-text">
+              <p>TOP 5 LEAST SELLING PIZZA TYPE</p>
+            </div>
+            <div class="chart-img">
+              <canvas id="top5LeastSellingPizzaTypeChart"></canvas>
+            </div>
+          </div>
           <div class="chart-item">
             <div class="chart-text">
               <p>BEST SELLING PIZZA SIZE</p>
@@ -171,14 +183,6 @@
               <canvas id="dailyPizzaSalesTrendChart"></canvas>
             </div>
           </div>
-          <div class="chart-item">
-            <div class="chart-text">
-              <p>Tabel</p>
-            </div>
-            <div class="chart-img">
-              <canvas id="pizzaSalesByHourChart"></canvas>
-            </div>
-          </div>
         </div>
       </section>
     </main>
@@ -187,6 +191,7 @@
       <div class="footer-card">
         <h3>2024 MSIB RevoU - Jakarta Team 21</h3>
       </div>
+      
     </footer>
 
     <script src="javascript/filter.js"></script>
