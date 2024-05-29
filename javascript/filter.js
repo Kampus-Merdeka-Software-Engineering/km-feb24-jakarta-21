@@ -190,10 +190,11 @@ function displayData(data) {
   createBestSellingPizzaSizeChart(data);
   createAveragePurchasedPriceChart(data);
   createDailyPizzaSalesTrendChart(data);
+  createTop5BestSellingPizzaTypeChart(data)
+  createTop5LeastSellingPizzaTypeChart(data)
 }
 
 let bestSellingPizzaSizeChart;
-
 function createBestSellingPizzaSizeChart(data) {
   const ctx = document.getElementById("bestSellingPizzaSizeChart").getContext("2d");
 
@@ -229,9 +230,10 @@ function createBestSellingPizzaSizeChart(data) {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: "right",
+          position: "top",
         },
         tooltip: {
           callbacks: {
@@ -266,7 +268,6 @@ function createBestSellingPizzaSizeChart(data) {
 }
 
 let averagePurchasedPriceChart;
-
 function createAveragePurchasedPriceChart(data) {
   const ctx = document.getElementById("averagePurchasedPriceChart").getContext("2d");
 
@@ -321,7 +322,7 @@ function createAveragePurchasedPriceChart(data) {
         {
           label: "Quantity",
           data: quantities,
-          backgroundColor: "#E4B455",
+          backgroundColor: "#d3b786",
           borderColor: "transparent", // Remove border from bar chart
           borderWidth: 0,
         },
@@ -329,6 +330,7 @@ function createAveragePurchasedPriceChart(data) {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: false,
@@ -391,7 +393,6 @@ function createAveragePurchasedPriceChart(data) {
 }
 
 let dailyPizzaSalesTrendChart;
-
 function createDailyPizzaSalesTrendChart(data) {
   const ctx = document.getElementById("dailyPizzaSalesTrendChart").getContext("2d");
 
@@ -435,6 +436,7 @@ function createDailyPizzaSalesTrendChart(data) {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: false,
@@ -442,17 +444,22 @@ function createDailyPizzaSalesTrendChart(data) {
         tooltip: {
           callbacks: {
             label: function (context) {
-              return `${context.label}: $${context.raw.toLocaleString()}`;
+              return `${context.label}: ${context.raw.toLocaleString()}`;
             },
+            // label: function (context) {
+            //   const value = Math.round(context.raw || 0).toLocaleString();
+            //   return `${value}`;
+            // },
           },
         },
         datalabels: {
           color: tickColor,
-          anchor: "end",
-          align: "end",
+          anchor: "start",
+          align: "start",
           formatter: function (value) {
-            return `$${value.toLocaleString()}`;
+            return `${value.toLocaleString()}`;
           },
+          // formatter: (value) => `${Math.round(value).toLocaleString()}`,
           font: {
             weight: "bold",
           },
@@ -460,11 +467,6 @@ function createDailyPizzaSalesTrendChart(data) {
       },
       scales: {
         x: {
-          // title: {
-          //   display: true,
-          //   text: 'Day',
-          //   color: tickColor
-          // },
           ticks: {
             color: tickColor,
           },
@@ -483,7 +485,7 @@ function createDailyPizzaSalesTrendChart(data) {
             beginAtZero: true,
             color: tickColor,
             callback: function (value) {
-              return `$${value.toLocaleString()}`;
+              return `${value.toLocaleString()}`;
             },
           },
           grid: {
@@ -495,3 +497,185 @@ function createDailyPizzaSalesTrendChart(data) {
     plugins: [ChartDataLabels],
   });
 }
+
+let top5BestSellingPizzaTypeChart;
+function createTop5BestSellingPizzaTypeChart(data) {
+  const ctx = document.getElementById("top5BestSellingPizzaTypeChart").getContext("2d");
+
+  if (top5BestSellingPizzaTypeChart) {
+    top5BestSellingPizzaTypeChart.destroy(); // Destroy previous chart instance if it exists
+  }
+
+  const pizzaTypes = [...new Set(data.map((item) => item["Pizza ID"]))];
+  const typeSales = pizzaTypes.map((type) => {
+    return data.filter((item) => item["Pizza ID"] === type).reduce((total, item) => total + parseFloat(item["Price"].replace("$", "")) * item["Quantity"], 0);
+  });
+
+  const top5Data = pizzaTypes
+    .map((type, index) => ({ type, sales: typeSales[index] }))
+    .sort((a, b) => b.sales - a.sales)
+    .slice(0, 5);
+
+  const top5Labels = top5Data.map((item) => item.type);
+  const top5Sales = top5Data.map((item) => item.sales);
+
+  let tickColor = "#000";
+  if (document.body.classList.contains("dark")) {
+    tickColor = "#fff";
+  }
+
+  top5BestSellingPizzaTypeChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: top5Labels,
+      datasets: [
+        {
+          label: "Total Sales",
+          data: top5Sales,
+          backgroundColor: "#AF672D",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: {
+            color: tickColor,
+          },
+          grid: {
+            display: false,
+          },
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 10000,
+            color: tickColor,
+            callback: function (value) {
+              return value.toLocaleString();
+            }
+          },
+          grid: {
+            display: false,
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              const value = Math.round(context.raw || 0).toLocaleString();
+              return `${value}`;
+            },
+          },
+        },
+        datalabels: {
+          anchor: 'center',
+          align: 'center',
+          formatter: (value) => `${Math.round(value).toLocaleString()}`,
+          color: '#fff',
+          font: {
+            weight: 'bold',
+          },
+        },
+      },
+    },
+    plugins: [ChartDataLabels],
+  });
+}
+
+let top5LeastSellingPizzaTypeChart;
+function createTop5LeastSellingPizzaTypeChart(data) {
+  const ctx = document.getElementById("top5LeastSellingPizzaTypeChart").getContext("2d");
+
+  if (top5LeastSellingPizzaTypeChart) {
+    top5LeastSellingPizzaTypeChart.destroy(); // Destroy previous chart instance if it exists
+  }
+
+  const pizzaTypes = [...new Set(data.map((item) => item["Pizza ID"]))];
+  const typeSales = pizzaTypes.map((type) => {
+    return data.filter((item) => item["Pizza ID"] === type).reduce((total, item) => total + parseFloat(item["Price"].replace("$", "")) * item["Quantity"], 0);
+  });
+
+  const top5Data = pizzaTypes
+    .map((type, index) => ({ type, sales: typeSales[index] }))
+    .sort((a, b) => a.sales - b.sales)
+    .slice(0, 5);
+
+  const top5Labels = top5Data.map((item) => item.type);
+  const top5Sales = top5Data.map((item) => item.sales);
+
+  let tickColor = "#000";
+  if (document.body.classList.contains("dark")) {
+    tickColor = "#fff";
+  }
+
+  top5LeastSellingPizzaTypeChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: top5Labels,
+      datasets: [
+        {
+          label: "Total Sales",
+          data: top5Sales,
+          backgroundColor: "#886839",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: {
+            color: tickColor,
+          }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1000,
+            color: tickColor,
+            callback: function (value) {
+              return value.toLocaleString();
+            },
+          },
+          grid: {
+            display: false,
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              const value = Math.round(context.raw || 0).toLocaleString();
+              return `${value}`;
+            },
+          },
+        },
+        datalabels: {
+          anchor: 'center',
+          align: 'center',
+          formatter: (value) => `${Math.round(value).toLocaleString()}`,
+          color: '#fff',
+          font: {
+            weight: 'bold',
+          },
+        },
+      },
+    },
+    plugins: [ChartDataLabels],
+  });
+}
+
