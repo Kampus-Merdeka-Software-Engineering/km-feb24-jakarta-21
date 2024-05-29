@@ -18,6 +18,7 @@ html {
   --card-filter: #fff;
   --card-color: #fff;
   --hover-color: #e4e9f7;
+  --table: rgba(132, 139, 200, 0.18);
 
   /* ====== Transition ====== */
   --tran-03: all 0.2s ease;
@@ -40,6 +41,7 @@ body.dark {
   --card-filter: #d3b786;
   --card-color: #2c2f38;
   --hover-color: #2c2f38;
+  --color: rgba(0, 0, 0, 0.4);;
 }
 
 .container-dashboard {
@@ -47,7 +49,6 @@ body.dark {
   width: 100%;
   padding: 20px 15px 20px 90px;
 }
-
 
 /* ========== Dashboard Header ========== */
 /* ========== Dashboard Header ========== */
@@ -158,7 +159,6 @@ header .select-btn .arrow-dwn {
   transition: var(--tran-03);
 }
 
-
 /* ========== Dashboard Analys ========== */
 /* ========== Dashboard Analys ========== */
 .analys {
@@ -205,7 +205,6 @@ header .select-btn .arrow-dwn {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
 /* ========== Dashboard Chart ========== */
 /* ========== Dashboard Chart ========== */
 .chart {
@@ -214,14 +213,24 @@ header .select-btn .arrow-dwn {
   gap: 16px;
   grid-template-columns: repeat(5, 1fr);
   grid-template-areas:
-  "tabel-1 tabel-1 tabel-2 tabel-2 best-size"
-  "avg-purchased avg-purchased daily-sales daily-sales daily-sales";
+    "tabel-1 tabel-1 tabel-2 tabel-2 best-size"
+    "avg-purchased avg-purchased daily-sales daily-sales daily-sales";
 }
-.chart-item:nth-child(1) { grid-area: tabel-1; }
-.chart-item:nth-child(2) { grid-area: tabel-2; }
-.chart-item:nth-child(3) { grid-area: best-size; }
-.chart-item:nth-child(4) { grid-area: avg-purchased; }
-.chart-item:nth-child(5) { grid-area: daily-sales; }
+.chart-item:nth-child(1) {
+  grid-area: tabel-1;
+}
+.chart-item:nth-child(2) {
+  grid-area: tabel-2;
+}
+.chart-item:nth-child(3) {
+  grid-area: best-size;
+}
+.chart-item:nth-child(4) {
+  grid-area: avg-purchased;
+}
+.chart-item:nth-child(5) {
+  grid-area: daily-sales;
+}
 .chart .chart-item {
   background-color: var(--card-color);
   padding: 20px 10px;
@@ -254,29 +263,41 @@ header .select-btn .arrow-dwn {
 }
 
 /* ========== Tabel ========== */
+.table {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 0 0 0;
+}
+.table .table-header {
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
 .content-table {
   border-collapse: collapse;
-  margin: 25px 0;
+  margin: 10px 0;
   font-size: 1rem;
-  width: 80%;
-  border-radius: 5px;
+  width: 100%;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.20);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 .content-table thead tr {
   background-color: #af672d;
   color: #fff;
-  text-align: left;
-  font-weight: bold;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 .content-table th,
 .content-table td {
   padding: 10px;
 }
 .content-table tbody tr {
-  background-color: #e4b455;
-  color: #fff;
-  border-bottom: 1px solid #dddddd;
+  background-color: var(--card-color);
+  color: var(--text-color);
+  text-align: center;
+  font-size: 1rem;
+  border-bottom: 0.5px solid var(--table);
 }
 
 /* ========== Footer ========== */
@@ -296,7 +317,6 @@ footer .footer-card h3 {
   font-weight: 700;
   color: #fff;
 }
-
 
 @media screen and (max-width: 1350px) {
   .chart {
@@ -318,7 +338,7 @@ footer .footer-card h3 {
     gap: 10px;
   }
   .chart .chart-item {
-   max-height: 300px;
+    max-height: 300px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -343,7 +363,7 @@ footer .footer-card h3 {
     width: 100%;
   }
   .select .pizza-type {
-    width: 300px;
+    width: 310px;
   }
   .analys .analys-sales {
     display: flex;
@@ -361,7 +381,7 @@ footer .footer-card h3 {
   }
   .chart .chart-item {
     max-height: 320px;
-   }
+  }
 }
 @media screen and (max-width: 576px) {
   .container-dashboard {
