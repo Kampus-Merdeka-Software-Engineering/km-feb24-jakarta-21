@@ -76,8 +76,14 @@ fetch("./data.json")
       });
     });
 
-    // Menampilkan Data awal nya 0
-    displayData([]);
+    // // Menampilkan Data awal nya 0
+    // displayData([]);
+
+    // Menampilkan Data awal dengan semua checkbox terpilih
+    const initialFilters = getSelectedFilters();
+    updateFilters(data, initialFilters);
+    const initialFilteredData = data.filter(filterData(initialFilters));
+    displayData(initialFilteredData);
   });
 
 function createFilter(data, attribute, containerSelector) {
@@ -190,8 +196,10 @@ function displayData(data) {
   createBestSellingPizzaSizeChart(data);
   createAveragePurchasedPriceChart(data);
   createDailyPizzaSalesTrendChart(data);
-  createTop5BestSellingPizzaTypeChart(data)
-  createTop5LeastSellingPizzaTypeChart(data)
+  createTop5BestSellingPizzaTypeChart(data);
+  createTop5LeastSellingPizzaTypeChart(data);
+
+  updateTop10BestSellingPizzaTable(data);
 }
 
 let bestSellingPizzaSizeChart;
@@ -444,7 +452,7 @@ function createDailyPizzaSalesTrendChart(data) {
         tooltip: {
           callbacks: {
             label: function (context) {
-              return `${context.label}: ${context.raw.toLocaleString()}`;
+              return `${context.label}: ${Math.round(context.raw).toLocaleString()}`;
             },
             // label: function (context) {
             //   const value = Math.round(context.raw || 0).toLocaleString();
@@ -457,7 +465,7 @@ function createDailyPizzaSalesTrendChart(data) {
           anchor: "start",
           align: "start",
           formatter: function (value) {
-            return `${value.toLocaleString()}`;
+            return `${Math.round(value).toLocaleString()}`;
           },
           // formatter: (value) => `${Math.round(value).toLocaleString()}`,
           font: {
@@ -556,7 +564,7 @@ function createTop5BestSellingPizzaTypeChart(data) {
             color: tickColor,
             callback: function (value) {
               return value.toLocaleString();
-            }
+            },
           },
           grid: {
             display: false,
@@ -576,12 +584,12 @@ function createTop5BestSellingPizzaTypeChart(data) {
           },
         },
         datalabels: {
-          anchor: 'center',
-          align: 'center',
+          anchor: "center",
+          align: "center",
           formatter: (value) => `${Math.round(value).toLocaleString()}`,
-          color: '#fff',
+          color: "#fff",
           font: {
-            weight: 'bold',
+            weight: "bold",
           },
         },
       },
@@ -636,7 +644,7 @@ function createTop5LeastSellingPizzaTypeChart(data) {
           beginAtZero: true,
           ticks: {
             color: tickColor,
-          }
+          },
         },
         y: {
           beginAtZero: true,
@@ -665,12 +673,12 @@ function createTop5LeastSellingPizzaTypeChart(data) {
           },
         },
         datalabels: {
-          anchor: 'center',
-          align: 'center',
+          anchor: "center",
+          align: "center",
           formatter: (value) => `${Math.round(value).toLocaleString()}`,
-          color: '#fff',
+          color: "#fff",
           font: {
-            weight: 'bold',
+            weight: "bold",
           },
         },
       },
@@ -679,3 +687,34 @@ function createTop5LeastSellingPizzaTypeChart(data) {
   });
 }
 
+function updateTop10BestSellingPizzaTable(data) {
+  const pizzaSales = data.reduce((acc, item) => {
+    const name = item["Name"];
+    const price = parseFloat(item["Price"].replace("$", ""));
+    const totalSales = price * item["Quantity"];
+    
+    if (acc[name]) {
+      acc[name] += totalSales;
+    } else {
+      acc[name] = totalSales;
+    }
+    return acc;
+  }, {});
+
+  const top10Pizzas = Object.entries(pizzaSales)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10);
+
+  const tableBody = document.querySelector(".content-table tbody");
+  tableBody.innerHTML = ""; // Clear existing rows
+
+  top10Pizzas.forEach((pizza, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${pizza[0]}</td>
+      <td>${Math.round(pizza[1]).toLocaleString()}</td>
+    `;
+    tableBody.appendChild(row);
+  });
+}
