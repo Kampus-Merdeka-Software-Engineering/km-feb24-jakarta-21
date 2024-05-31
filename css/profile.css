@@ -108,7 +108,7 @@ p {
 /* ========== Footer ========== */
 /* ========== Footer ========== */
 footer {
-  background-color: #d3b786;
+  background-color: #886839;
   width: 100%;
   padding: 15px 20px;
 }
@@ -118,6 +118,12 @@ footer .footer-card {
   align-items: center;
 }
 footer .footer-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+footer span a {
+  text-decoration: none;
   font-size: 1rem;
   font-weight: 700;
   color: #fff;
