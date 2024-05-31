@@ -14,19 +14,40 @@ hamburgerMenu.addEventListener("click", () => {
 });
 
 // ===== Darkmode
+// let getMode = localStorage.getItem("mode");
+// if (getMode && getMode === "dark") {
+//   body.classList.toggle("dark");
+//   modeSwitch.classList.toggle("active");
+// }
+
+// modeSwitch.addEventListener("click", () => {
+//   body.classList.toggle("dark");
+//   if (!body.classList.contains("dark")) {
+//     modeText.innerText = "Dark Mode";
+//     return localStorage.setItem("mode", "light");
+//   }
+//   modeText.innerText = "Light Mode";
+//   localStorage.setItem("mode", "dark");
+// });
+// modeSwitch.addEventListener("click", () => modeSwitch.classList.toggle("active"));
+
+// ============ Darkmode =============
 let getMode = localStorage.getItem("mode");
 if (getMode && getMode === "dark") {
   body.classList.toggle("dark");
   modeSwitch.classList.toggle("active");
+  document.dispatchEvent(new Event('modeChange'));
 }
 
 modeSwitch.addEventListener("click", () => {
   body.classList.toggle("dark");
   if (!body.classList.contains("dark")) {
     modeText.innerText = "Dark Mode";
-    return localStorage.setItem("mode", "light");
+    localStorage.setItem("mode", "light");
+  } else {
+    modeText.innerText = "Light Mode";
+    localStorage.setItem("mode", "dark");
   }
-  modeText.innerText = "Light Mode";
-  localStorage.setItem("mode", "dark");
+  document.dispatchEvent(new Event('modeChange'));
 });
 modeSwitch.addEventListener("click", () => modeSwitch.classList.toggle("active"));

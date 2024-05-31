@@ -339,7 +339,7 @@ function createAveragePurchasedPriceChart(data) {
         {
           label: "Quantity",
           data: quantities,
-          backgroundColor: "#d3b786",
+          backgroundColor: "#E4B455",
           borderColor: "transparent", // Remove border from bar chart
           borderWidth: 0,
         },
@@ -735,3 +735,32 @@ function updateBestSellingPizzaTable(data) {
   });
 }
 
+document.addEventListener('modeChange', () => {
+  let tickColor = document.body.classList.contains("dark") ? "#fff" : "#000";
+
+  if (top5BestSellingPizzaTypeChart) {
+    top5BestSellingPizzaTypeChart.options.scales.x.ticks.color = tickColor;
+    top5BestSellingPizzaTypeChart.options.scales.y.ticks.color = tickColor;
+    top5BestSellingPizzaTypeChart.update();
+  }
+  if (top5LeastSellingPizzaTypeChart) {
+    top5LeastSellingPizzaTypeChart.options.scales.x.ticks.color = tickColor;
+    top5LeastSellingPizzaTypeChart.options.scales.y.ticks.color = tickColor;
+    top5LeastSellingPizzaTypeChart.update();
+  }
+  if (averagePurchasedPriceChart) {
+    averagePurchasedPriceChart.options.scales.x.ticks.color = tickColor;
+    averagePurchasedPriceChart.options.scales.y.ticks.color = tickColor;
+    averagePurchasedPriceChart.update();
+  }
+  if (dailyPizzaSalesTrendChart) {
+    dailyPizzaSalesTrendChart.options.scales.x.ticks.color = tickColor;
+    dailyPizzaSalesTrendChart.options.scales.y.ticks.color = tickColor;
+    dailyPizzaSalesTrendChart.options.plugins.datalabels.color = tickColor;
+    dailyPizzaSalesTrendChart.update();
+  }
+  if (bestSellingPizzaSizeChart) {
+    bestSellingPizzaSizeChart.options.plugins.legend.labels.color = tickColor;
+    bestSellingPizzaSizeChart.update();
+  }
+});
