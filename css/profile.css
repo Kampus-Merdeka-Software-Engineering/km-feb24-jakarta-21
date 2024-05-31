@@ -81,6 +81,11 @@ body.dark {
   border: 2px solid var(--primary-color-profile);
 }
 
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .card-body h1,
 p {
   font-size: 1.2rem;
@@ -90,7 +95,7 @@ p {
 
 .card-body ul,
 .card-footer {
-  margin-top: 10px;
+  margin: 10px;
 }
 .card-body ul li {
   padding-top: 3px;
