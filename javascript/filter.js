@@ -21,6 +21,7 @@ fetch("./data.json")
     createFilter(data, "Name", ".pizza-type");
     createFilter(data, "Category", ".pizza-category");
     createFilter(data, "Size", ".pizza-size");
+    updateBestSellingPizzaTable(data)
 
     // Membuat Button SELECT ALL di Pizza Type
     const selectAllButton = document.createElement("button");
@@ -198,8 +199,6 @@ function displayData(data) {
   createDailyPizzaSalesTrendChart(data);
   createTop5BestSellingPizzaTypeChart(data);
   createTop5LeastSellingPizzaTypeChart(data);
-
-  updateTop10BestSellingPizzaTable(data);
 }
 
 let bestSellingPizzaSizeChart;
@@ -222,10 +221,15 @@ function createBestSellingPizzaSizeChart(data) {
     XL: "#E4B455",
   };
 
-  const colors = pizzaSizes.map((size) => sizeColors[size] || "#000000");
+  const colors = pizzaSizes.map((size) => sizeColors[size] || "#fff");
+
+  let tickColor = "#000";
+  if (document.body.classList.contains("dark")) {
+    tickColor = "#fff";
+  }
 
   bestSellingPizzaSizeChart = new Chart(ctx, {
-    type: "pie",
+    type: "doughnut",
     data: {
       labels: pizzaSizes,
       datasets: [
@@ -242,6 +246,11 @@ function createBestSellingPizzaSizeChart(data) {
       plugins: {
         legend: {
           position: "top",
+          labels: {
+            color: tickColor, // Change this color to your desired label color
+            usePointStyle: true, // Use point style for legend
+            // pointStyle: 'circle',
+          },
         },
         tooltip: {
           callbacks: {
@@ -317,7 +326,7 @@ function createAveragePurchasedPriceChart(data) {
     quantities.splice(otherIndex, 1);
   }
 
-  let = tickColor = "#000";
+  let tickColor = "#000";
   if (document.body.classList.contains("dark")) {
     tickColor = "#fff";
   }
@@ -645,11 +654,14 @@ function createTop5LeastSellingPizzaTypeChart(data) {
           ticks: {
             color: tickColor,
           },
+          grid: {
+            display: false,
+          },
         },
         y: {
           beginAtZero: true,
           ticks: {
-            stepSize: 1000,
+            stepSize: 5000,
             color: tickColor,
             callback: function (value) {
               return value.toLocaleString();
@@ -687,12 +699,12 @@ function createTop5LeastSellingPizzaTypeChart(data) {
   });
 }
 
-function updateTop10BestSellingPizzaTable(data) {
+function updateBestSellingPizzaTable(data) {
   const pizzaSales = data.reduce((acc, item) => {
     const name = item["Name"];
     const price = parseFloat(item["Price"].replace("$", ""));
     const totalSales = price * item["Quantity"];
-    
+
     if (acc[name]) {
       acc[name] += totalSales;
     } else {
@@ -701,20 +713,25 @@ function updateTop10BestSellingPizzaTable(data) {
     return acc;
   }, {});
 
-  const top10Pizzas = Object.entries(pizzaSales)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 10);
+  const sortedPizzaSales = Object.entries(pizzaSales)
+    .sort((a, b) => b[1] - a[1]);
 
-  const tableBody = document.querySelector(".content-table tbody");
-  tableBody.innerHTML = ""; // Clear existing rows
+  const tableData = sortedPizzaSales.map((pizza, index) => [
+    index + 1,
+    pizza[0],
+    `$ ${Math.round(pizza[1]).toLocaleString()}`
+  ]);
 
-  top10Pizzas.forEach((pizza, index) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${pizza[0]}</td>
-      <td>${Math.round(pizza[1]).toLocaleString()}</td>
-    `;
-    tableBody.appendChild(row);
+  $(document).ready(function() {
+    $('.content-table').DataTable({
+      data: tableData,
+      destroy: true,  // Allow reinitialization of DataTable
+      responsive: true,
+    });
+    $('.content-table tbody').on('click', 'td', function() {
+      $('.content-table tbody td').removeClass('active'); // Menghapus kelas 'active' dari semua kolom
+      $(this).addClass('active'); // Menambahkan kelas 'active' ke kolom yang diklik
+  });
   });
 }
+

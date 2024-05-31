@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
+    <!-- Link Data Tabels -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
 
     <link rel="icon" href="../asset/logo-team-21.png" type="image/x-icon" />
 
@@ -142,6 +144,23 @@
       </section>
 
       <section class="dashboard">
+        <div class="table">
+          <div class="table-header">
+            <h3>BEST SELLING PIZZA</h3>
+          </div>
+          <table class="content-table display">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Pizza Name</th>
+                <th>Sum of Price</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+
         <div class="chart">
           <div class="chart-item chart-table">
             <div class="chart-text">
@@ -185,22 +204,7 @@
           </div>
         </div>
 
-        <div class="table">
-          <div class="table-header">
-            <h3>TOP 10 BEST SELLING PIZZA</h3>
-          </div>
-          <table class="content-table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Pizza Name</th>
-                <th>Sum of Price</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
+        
       </section>
     </main>
 
@@ -210,10 +214,11 @@
       </div>
     </footer>
 
-    <script src="javascript/filter.js"></script>
-    <script src="javascript/sidebar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-    <!-- <script src="example.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="javascript/filter.js"></script>
+    <script src="javascript/sidebar.js"></script>
   </body>
 </html>

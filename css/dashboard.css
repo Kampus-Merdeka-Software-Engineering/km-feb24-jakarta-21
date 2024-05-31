@@ -19,6 +19,7 @@ html {
   --card-color: #fff;
   --hover-color: #e4e9f7;
   --table: rgba(132, 139, 200, 0.18);
+  --table-input: #001838;
 
   /* ====== Transition ====== */
   --tran-03: all 0.2s ease;
@@ -42,6 +43,7 @@ body.dark {
   --card-color: #2c2f38;
   --hover-color: #2c2f38;
   --color: rgba(0, 0, 0, 0.4);;
+  --table-input: #bfbfbf;
 }
 
 .container-dashboard {
@@ -52,7 +54,7 @@ body.dark {
 
 /* ========== Dashboard Header ========== */
 /* ========== Dashboard Header ========== */
-header {
+.container-dashboard header {
   display: flex;
   justify-content: space-between;
 }
@@ -272,32 +274,62 @@ header .select-btn .arrow-dwn {
   font-size: 1.2rem;
   color: var(--text-color);
 }
-.content-table {
-  border-collapse: collapse;
-  margin: 10px 0;
+
+div.dt-container{
+  color: var(--text-color);
+  font-weight: 500;
   font-size: 1rem;
+  position: static;
+  margin-top: 5px;
+}
+div.dt-container select.dt-input, div.dt-container .dt-search input {
+  border: 1.5px solid var(--table-input);
+}
+div.dt-container select.dt-input option {
+  background-color: var(--card-color);
+}
+table.dataTable {
+  border-collapse: collapse;
+  background-color: var(--card-color);
+  margin: 10px 0;
   width: 100%;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
-.content-table thead tr {
+table.dataTable thead tr {
   background-color: #af672d;
   color: #fff;
   text-align: center;
   font-size: 1.1rem;
   font-weight: 700;
 }
-.content-table th,
-.content-table td {
-  padding: 10px;
+table.dataTable thead > tr > th.dt-orderable-asc{
+  text-align: center;
 }
-.content-table tbody tr {
-  background-color: var(--card-color);
-  color: var(--text-color);
+table.dataTable > tbody > tr {
   text-align: center;
   font-size: 1rem;
   border-bottom: 0.5px solid var(--table);
+}
+table.dataTable > tbody > tr{
+  background-color: var(--card-color);
+}
+table.dataTable tbody tr:hover td {
+  background-color: transparent;
+}
+table.dataTable tbody td.active {
+  background-color: transparent; 
+}
+table.dataTable td.dt-type-numeric {
+  text-align: center;
+}
+table.dataTable {
+  width: 100% !important;
+}
+div.dt-container .dt-paging .dt-paging-button.disabled, 
+div.dt-container .dt-paging .dt-paging-button.disabled:hover, 
+div.dt-container .dt-paging .dt-paging-button.disabled:active {
+  color: var(--text-color) !important;
 }
 
 /* ========== Footer ========== */
@@ -331,7 +363,7 @@ footer .footer-card h3 {
   .container-dashboard {
     max-width: 992px;
   }
-  .dash-header {
+  .container-dashboard header {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -369,6 +401,9 @@ footer .footer-card h3 {
     display: flex;
     align-items: center;
     flex-direction: column-reverse;
+  }
+  .table .table-header {
+    text-align: center;
   }
   .chart {
     grid-template-columns: 1fr;
