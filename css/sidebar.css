@@ -15,6 +15,7 @@ html {
   --toggle-color: #886839;
   --card-sidebar-color: #eceafb;
   --text-color: #1b1b1b;
+  --hamburger: #434343;
 
   /* ====== Transition ====== */
   --tran-03: all 0.2s ease;
@@ -35,6 +36,7 @@ body.dark {
   --toggle-color: #886839;
   --card-sidebar-color: #2c2f38;
   --text-color: #fff;
+  --hamburger: #e7e6e6;
 }
 
 /* ========== Sidebar ========== */
@@ -48,7 +50,7 @@ body.dark {
   box-shadow: 0.5px 0 5px var(--text-color);
   background: var(--sidebar-color);
   transition: var(--tran-05);
-  z-index: 100;
+  z-index: 1000;
 }
 .sidebar.close-sidebar {
   width: 70px;
@@ -210,23 +212,26 @@ body.dark .mode .sun-moon i.moon {
 .hamburger {
   width: 100%;
   display: none;
-  background-color: var(--body-color);
+  background-color: var(--sidebar-color);
   padding: 10px 5%;
   margin-bottom: 10px;
   box-shadow: 0.5px 0 5px var(--text-color);
+  position: fixed;
+  z-index: 1000;
 }
 .nav-hamburger {
   border-radius: 5px;
-  background-color: var(--toggle-color);
+  background-color: transparent;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2px;
+  border: 2px solid var(--hamburger);
 }
 .nav-hamburger i {
   font-size: 2.5rem;
-  color: #fff;
+  color: var(--hamburger);
 }
 
 
@@ -234,8 +239,12 @@ body.dark .mode .sun-moon i.moon {
   html {
     font-size: 12px !important;
   }
-  .sidebar.close-sidebar {
+  /* .sidebar.close-sidebar {
     display: none;
+  } */
+  .sidebar.close-sidebar {
+    transform: translateX(-110%); /* Menggeser sidebar keluar layar */
+    box-shadow: none;
   }
   .sidebar header .toggle {
     display: none;
