@@ -22,6 +22,7 @@ html {
   --table-input: #001838;
 
   /* ====== Transition ====== */
+  --tran-02: all 0.1s ease;
   --tran-03: all 0.2s ease;
   --tran-03: all 0.3s ease;
   --tran-04: all 0.3s ease;
@@ -195,6 +196,7 @@ header .select-btn .arrow-dwn {
   background-color: var(--card-color);
   border-radius: 15px;
   box-sizing: border-box;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 .analys-sales .sales-icon {
   display: flex;
@@ -259,6 +261,7 @@ header .select-btn .arrow-dwn {
   align-items: center;
   flex-direction: column;
   box-sizing: border-box;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 .chart .chart-item .chart-img {
   width: 100%;
@@ -311,6 +314,7 @@ table.dataTable {
   width: 100%;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 table.dataTable thead tr {
   background-color: #af672d;
