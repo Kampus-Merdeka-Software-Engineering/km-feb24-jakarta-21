@@ -39,7 +39,7 @@ body.dark {
   --toggle-color: #fff;
   --darkmode: #fff;
   --text-color: #fff;
-  --card-filter: #d3b786;
+  --card-filter: #947f5d;
   --card-color: #2c2f38;
   --hover-color: #2c2f38;
   --color: rgba(0, 0, 0, 0.4);;
@@ -103,15 +103,25 @@ header .select-btn .arrow-dwn {
 .select .list-items {
   position: absolute;
   width: 150px;
-  max-height: 280px;
+  max-height: 0;
   margin-top: 5px;
   border-radius: 5px;
-  padding: 5px;
+  padding: 0 5px;
   background-color: var(--card-filter);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  display: none;
+  overflow-y: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  z-index: 100 !important;
   overflow-y: scroll;
 }
+
+.select-btn.open-list ~ .list-items {
+  max-height: 285px;
+  opacity: 1;
+  /* padding: 5px; */
+}
+
 .select .pizza-type {
   width: 350px;
 }
@@ -122,17 +132,20 @@ header .select-btn .arrow-dwn {
   border-radius: 5px;
   border: none;
   margin: 5px 5px;
-  color: #fff;
-  background-color: #886839;
+  background-color: transparent;
+  color: var(--text-color);
+  border: 3px solid var(--hover-color);
+  box-sizing: border-box;
 }
 .select .list-items .select-all:hover {
   cursor: pointer;
+  color: var(--text-color);
+  background-color: var(--hover-color);
 }
-
 .select .list-items .item {
   display: flex;
-  width: 100%;
   align-items: center;
+  width: 100%;
   list-style: none;
   height: 30px;
   cursor: pointer;
@@ -146,6 +159,8 @@ header .select-btn .arrow-dwn {
 }
 .select .list-items .item label {
   font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
   font-weight: 400;
   padding-left: 5px;
   color: var(--text-color);
@@ -164,15 +179,16 @@ header .select-btn .arrow-dwn {
 /* ========== Dashboard Analys ========== */
 /* ========== Dashboard Analys ========== */
 .analys {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   justify-items: center;
 }
 .analys .analys-sales {
   width: 100%;
-  height: 100px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -237,7 +253,7 @@ header .select-btn .arrow-dwn {
   background-color: var(--card-color);
   padding: 20px 10px;
   border-radius: 15px;
-  height: 360px;
+  height: 350px;
   display: flex;
   justify-content: space-betwen;
   align-items: center;
@@ -268,7 +284,7 @@ header .select-btn .arrow-dwn {
 .table {
   display: flex;
   flex-direction: column;
-  padding: 25px 0 0 0;
+  padding: 20px 0 0 0;
 }
 .table .table-header {
   font-size: 1.2rem;
@@ -329,7 +345,7 @@ table.dataTable {
 div.dt-container .dt-paging .dt-paging-button.disabled, 
 div.dt-container .dt-paging .dt-paging-button.disabled:hover, 
 div.dt-container .dt-paging .dt-paging-button.disabled:active {
-  color: var(--text-color) !important;
+  color: #f4f4f4 !important;
 }
 
 /* ========== Footer ========== */
@@ -388,6 +404,9 @@ footer span a {
     max-width: 768px;
     padding: 20px 5%;
   }
+  .dash-header {
+    padding-top: 50px;
+  }
   header .select {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -406,6 +425,7 @@ footer span a {
   .analys .analys-sales {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column-reverse;
   }
   .table .table-header {
@@ -436,6 +456,8 @@ footer span a {
     display: flex;
     align-items: center;
     flex-direction: row;
+    justify-content: space-around;
+    height: 85px;
   }
 }
 @media screen and (max-width: 400px) {

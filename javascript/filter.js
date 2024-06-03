@@ -3,14 +3,24 @@ const selectBtns = document.querySelectorAll(".select-btn");
 
 selectBtns.forEach((selectBtn) => {
   selectBtn.addEventListener("click", () => {
-    const isOpen = selectBtn.classList.toggle("open-list");
-    if (isOpen) {
-      const openDropdowns = document.querySelectorAll(".open-list");
-      openDropdowns.forEach((dropdown) => {
-        if (dropdown !== selectBtn) {
-          dropdown.classList.remove("open-list");
-        }
-      });
+    const listItems = selectBtn.nextElementSibling;
+    const Open = selectBtn.classList.toggle("open-list");
+
+    // Tutup dropdown lain yang terbuka
+    selectBtns.forEach((btn) => {
+      if (btn !== selectBtn) {
+        btn.classList.remove("open-list");
+        btn.nextElementSibling.style.maxHeight = "0";
+        btn.nextElementSibling.style.opacity = "0";
+      }
+    });
+
+    if (Open) {
+      listItems.style.maxHeight = "285px";
+      listItems.style.opacity = "1";
+    } else {
+      listItems.style.maxHeight = "0";
+      listItems.style.opacity = "0";
     }
   });
 });
@@ -21,7 +31,7 @@ fetch("./data.json")
     createFilter(data, "Name", ".pizza-type");
     createFilter(data, "Category", ".pizza-category");
     createFilter(data, "Size", ".pizza-size");
-    updateBestSellingPizzaTable(data)
+    bestSellingPizzaTable(data);
 
     // Membuat Button SELECT ALL di Pizza Type
     const selectAllButton = document.createElement("button");
@@ -70,7 +80,7 @@ fetch("./data.json")
         const selectedFilters = getSelectedFilters();
         const filteredData = data.filter(filterData(selectedFilters));
         if (Object.values(selectedFilters).every((filter) => filter.length === 0)) {
-          displayData([]); // Tampilkan data kosong jika tidak ada yang di ceklis
+          displayData([]);
         } else {
           displayData(filteredData);
         }
@@ -150,8 +160,7 @@ function getSelectedFilters() {
     const attribute = checkbox.parentElement.getAttribute("data-attribute");
     selectedFilters[attribute].push(checkbox.id);
   });
-
-  console.log(selectedFilters);
+  // console.log(selectedFilters);
   return selectedFilters;
 }
 
@@ -206,7 +215,7 @@ function createBestSellingPizzaSizeChart(data) {
   const ctx = document.getElementById("bestSellingPizzaSizeChart").getContext("2d");
 
   if (bestSellingPizzaSizeChart) {
-    bestSellingPizzaSizeChart.destroy(); // Destroy previous chart instance if it exists
+    bestSellingPizzaSizeChart.destroy();
   }
 
   const pizzaSizes = [...new Set(data.map((item) => item.Size))];
@@ -221,7 +230,7 @@ function createBestSellingPizzaSizeChart(data) {
     XL: "#E4B455",
   };
 
-  const colors = pizzaSizes.map((size) => sizeColors[size] || "#fff");
+  const colors = pizzaSizes.map((size) => sizeColors[size] || "#000");
 
   let tickColor = "#000";
   if (document.body.classList.contains("dark")) {
@@ -237,19 +246,24 @@ function createBestSellingPizzaSizeChart(data) {
           label: "Total Sales",
           data: sizeSales,
           backgroundColor: colors,
+          borderWidth: 1,
         },
       ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: {
+        animateRotate: true,
+        duration: 1500,
+        easing: "easeInOutCirc",
+      },
       plugins: {
         legend: {
           position: "top",
           labels: {
-            color: tickColor, // Change this color to your desired label color
-            usePointStyle: true, // Use point style for legend
-            // pointStyle: 'circle',
+            color: tickColor,
+            usePointStyle: true,
           },
         },
         tooltip: {
@@ -264,6 +278,7 @@ function createBestSellingPizzaSizeChart(data) {
           },
         },
         datalabels: {
+          display: true,
           formatter: (value, context) => {
             const total = context.chart.data.datasets[0].data.reduce((sum, val) => sum + val, 0);
             const percentage = ((value / total) * 100).toFixed(2);
@@ -282,6 +297,7 @@ function createBestSellingPizzaSizeChart(data) {
     },
     plugins: [ChartDataLabels],
   });
+  bestSellingPizzaSizeChart.update();
 }
 
 let averagePurchasedPriceChart;
@@ -340,14 +356,18 @@ function createAveragePurchasedPriceChart(data) {
           label: "Quantity",
           data: quantities,
           backgroundColor: "#E4B455",
-          borderColor: "transparent", // Remove border from bar chart
-          borderWidth: 0,
+          borderRadius: 10,
+          borderSkipped: false,
         },
       ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: {
+        duration: 1000,
+        easing: "easeInOutQuad",
+      },
       plugins: {
         legend: {
           display: false,
@@ -373,24 +393,14 @@ function createAveragePurchasedPriceChart(data) {
       },
       scales: {
         x: {
-          title: {
-            // color : '#fff',
-            // display: true,
-            // text: 'Price Range',
-          },
           ticks: {
-            color: tickColor, // Set color of x-axis ticks to white
+            color: tickColor, 
           },
           grid: {
-            display: false, // Hide x-axis grid lines
+            display: false,
           },
         },
         y: {
-          title: {
-            // color : '#fff',
-            // display: true,
-            // text: 'Quantity',
-          },
           ticks: {
             stepSize: 5000,
             beginAtZero: true,
@@ -400,7 +410,7 @@ function createAveragePurchasedPriceChart(data) {
             },
           },
           grid: {
-            display: false, // Hide x-axis grid lines
+            display: false, 
           },
         },
       },
@@ -454,6 +464,14 @@ function createDailyPizzaSalesTrendChart(data) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: {
+        tension: {
+          duration: 2000, // Durasi animasi
+          easing: "linear", 
+          from: 1.2, 
+          to: 0.5, 
+        },
+      },
       plugins: {
         legend: {
           display: false,
@@ -485,20 +503,15 @@ function createDailyPizzaSalesTrendChart(data) {
       scales: {
         x: {
           ticks: {
-            color: tickColor,
+            color: tickColor
           },
           grid: {
             display: false,
           },
         },
         y: {
-          // title: {
-          //   display: true,
-          //   text: 'Total Sales ($)',
-          //   color: tickColor
-          // },
           ticks: {
-            stepSize: 50000, // Set step size to 50,000
+            stepSize: 50000,
             beginAtZero: true,
             color: tickColor,
             callback: function (value) {
@@ -520,7 +533,7 @@ function createTop5BestSellingPizzaTypeChart(data) {
   const ctx = document.getElementById("top5BestSellingPizzaTypeChart").getContext("2d");
 
   if (top5BestSellingPizzaTypeChart) {
-    top5BestSellingPizzaTypeChart.destroy(); // Destroy previous chart instance if it exists
+    top5BestSellingPizzaTypeChart.destroy();
   }
 
   const pizzaTypes = [...new Set(data.map((item) => item["Pizza ID"]))];
@@ -550,12 +563,18 @@ function createTop5BestSellingPizzaTypeChart(data) {
           label: "Total Sales",
           data: top5Sales,
           backgroundColor: "#AF672D",
+          borderRadius: 10,
+          borderSkipped: false,
         },
       ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: {
+        duration: 1000,
+        easing: "easeInOutQuad",
+      },
       scales: {
         x: {
           beginAtZero: true,
@@ -612,7 +631,7 @@ function createTop5LeastSellingPizzaTypeChart(data) {
   const ctx = document.getElementById("top5LeastSellingPizzaTypeChart").getContext("2d");
 
   if (top5LeastSellingPizzaTypeChart) {
-    top5LeastSellingPizzaTypeChart.destroy(); // Destroy previous chart instance if it exists
+    top5LeastSellingPizzaTypeChart.destroy();
   }
 
   const pizzaTypes = [...new Set(data.map((item) => item["Pizza ID"]))];
@@ -642,12 +661,18 @@ function createTop5LeastSellingPizzaTypeChart(data) {
           label: "Total Sales",
           data: top5Sales,
           backgroundColor: "#886839",
+          borderRadius: 10,
+          borderSkipped: false,
         },
       ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: {
+        duration: 1000,
+        easing: "easeInOutQuad",
+      },
       scales: {
         x: {
           beginAtZero: true,
@@ -699,7 +724,7 @@ function createTop5LeastSellingPizzaTypeChart(data) {
   });
 }
 
-function updateBestSellingPizzaTable(data) {
+function bestSellingPizzaTable(data) {
   const pizzaSales = data.reduce((acc, item) => {
     const name = item["Name"];
     const price = parseFloat(item["Price"].replace("$", ""));
@@ -713,29 +738,24 @@ function updateBestSellingPizzaTable(data) {
     return acc;
   }, {});
 
-  const sortedPizzaSales = Object.entries(pizzaSales)
-    .sort((a, b) => b[1] - a[1]);
+  const sortedPizzaSales = Object.entries(pizzaSales).sort((a, b) => b[1] - a[1]);
 
-  const tableData = sortedPizzaSales.map((pizza, index) => [
-    index + 1,
-    pizza[0],
-    `$ ${Math.round(pizza[1]).toLocaleString()}`
-  ]);
+  const tableData = sortedPizzaSales.map((pizza, index) => [index + 1, pizza[0], `$ ${Math.round(pizza[1]).toLocaleString()}`]);
 
-  $(document).ready(function() {
-    $('.content-table').DataTable({
+  $(document).ready(function () {
+    $(".content-table").DataTable({
       data: tableData,
-      destroy: true,  // Allow reinitialization of DataTable
+      destroy: true,
       responsive: true,
     });
-    $('.content-table tbody').on('click', 'td', function() {
-      $('.content-table tbody td').removeClass('active'); // Menghapus kelas 'active' dari semua kolom
-      $(this).addClass('active'); // Menambahkan kelas 'active' ke kolom yang diklik
-  });
+    $(".content-table tbody").on("click", "td", function () {
+      $(".content-table tbody td").removeClass("active");
+      $(this).addClass("active");
+    });
   });
 }
 
-document.addEventListener('modeChange', () => {
+document.addEventListener("modeChange", () => {
   let tickColor = document.body.classList.contains("dark") ? "#fff" : "#000";
 
   if (top5BestSellingPizzaTypeChart) {
