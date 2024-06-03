@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
+    <!-- Link Animasi AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-    <link rel="icon" href="../asset/logo-team-21.png" type="image/x-icon" />
+    <link rel="icon" href="../asset/logoteam21.png" type="image/x-icon" />
 
     <!-- Link Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,23 +21,23 @@
     <link rel="stylesheet" href="css/profile.css" />
     <link rel="stylesheet" href="css/sidebar.css" />
   </head>
-  
+
   <body>
     <!-- ========== Sidebar ========== -->
     <nav class="sidebar close-sidebar">
       <header>
-        <div class="header-logo">
+        <div class="header-logo" data-aos="fade-right" data-aos-duration="1000">
           <span class="image">
-            <img src="asset/logo-team-21.png" alt="logo" />
+            <img src="asset/logoteam21.png" alt="logo" />
           </span>
           <div class="text logo-text">
             <span class="name">Jakarta 21</span>
           </div>
         </div>
-        <i class="bx bx-chevron-right toggle"></i>
+        <i class="bx bx-chevron-right toggle" data-aos="zoom-in" data-aos-duration="1000"></i>
       </header>
 
-      <div class="nav-menu">
+      <div class="nav-menu" data-aos="fade-right" data-aos-duration="1000">
         <div class="menu">
           <ul class="menu-links">
             <li class="nav-link">
@@ -68,28 +70,34 @@
     </nav>
 
     <div class="hamburger">
-      <div class="nav-hamburger">
-        <i class='bx bx-menu' id="btn" ></i>
+      <div class="nav-hamburger" data-aos="zoom-in" data-aos-duration="1500">
+        <i class="bx bx-menu open-menu" id="btn"></i>
+        <i class="bx bx-menu-alt-right close-menu" id="btn"></i>
       </div>
     </div>
 
     <!-- ========== Profile ========== -->
     <section class="container-profile">
-        <div class="team">
-          <h1>Team 21 Section Jakarta</h1>
-        </div>
+      <div class="team" data-aos="zoom-in" data-aos-duration="1000">
+        <h1>Team 21 Section Jakarta</h1>
+      </div>
 
-        <div class="container-card">
-        </div>
+      <div class="container-card"></div>
     </section>
 
     <footer>
       <div class="footer-card">
-        <h3>2024 MSIB RevoU - <span><a href="https://github.com/Kampus-Merdeka-Software-Engineering/km-feb24-jakarta-21">Jakarta Team 21</a></span></h3>
+        <h3>
+          2024 MSIB RevoU - <span><a href="https://github.com/Kampus-Merdeka-Software-Engineering/km-feb24-jakarta-21">Jakarta Team 21</a></span>
+        </h3>
       </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="javascript/profile.js"></script>
     <script src="javascript/sidebar.js"></script>
+    <script>
+      AOS.init();
+    </script>
   </body>
 </html>
