@@ -11,13 +11,13 @@ html {
 
 :root {
   /* ===== Color ===== */
-  --body-color: #e4e9f7;
+  --body-color: #e0e6f5;
   --toggle-color: #fff;
   --darkmode: #0075ff;
   --text-color: #000;
   --card-filter: #fff;
   --card-color: #fff;
-  --hover-color: #e4e9f7;
+  --hover-color: #e0e6f5;
   --table: rgba(132, 139, 200, 0.18);
   --table-input: #001838;
 
@@ -446,6 +446,9 @@ footer span a {
   }
   .chart .chart-item {
     max-height: 320px;
+  }
+  footer {
+    border-radius: 25px 25px 0 0 ;
   }
 }
 @media screen and (max-width: 576px) {

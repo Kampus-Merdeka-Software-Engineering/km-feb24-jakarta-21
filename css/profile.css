@@ -9,7 +9,7 @@ html {
 }
 :root {
   /* ===== Color ===== */
-  --body-color: #e4e9f7;
+  --body-color: #e0e6f5;
   --text-color: #1b1b1b;
   --card-color: #fff;
   --primary-color-profile: #886839;
@@ -55,6 +55,7 @@ body.dark {
 }
 .container-card .box {
   background-color: var(--card-color);
+  max-height: 410px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,9 +67,9 @@ body.dark {
   transition: var(--tran-03);
 }
 .container-card .box .image {
-  margin: 8px 0;
-  height: 50%;
-  width: 150px;
+  margin: 5px 0;
+  height: 210px;
+  width: 210px;
   background-color: var(--primary-color-profile);
   padding: 3px;
   border-radius: 50%;
@@ -78,7 +79,7 @@ body.dark {
   width: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--primary-color-profile);
+  border: 1px solid var(--primary-color-profile);
 }
 
 .card-body {
@@ -102,7 +103,7 @@ p {
 .card-body ul li {
   padding-top: 3px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   list-style: none;
   color: var(--text-color);
 }
@@ -146,6 +147,9 @@ footer span a {
   }
   .team h1 {
     padding-top: 50px;
+  }
+  footer {
+    border-radius: 20px 20px 0 0 ;
   }
 }
 @media screen and (max-width: 576px) {

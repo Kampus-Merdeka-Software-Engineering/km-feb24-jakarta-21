@@ -10,10 +10,10 @@ html {
 
 :root {
   /* ===== Color ===== */
-  --body-color: #e4e9f7;
+  --body-color: #e0e6f5;
   --sidebar-color: #fff;
   --toggle-color: #886839;
-  --card-sidebar-color: #eceafb;
+  --card-sidebar-color: #e0e6f5;
   --text-color: #1b1b1b;
   --hamburger: #434343;
 
