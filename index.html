@@ -3,12 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pizza Sales Team 21 - Dashboard</title>
+    <title>Pizza Sales Team 21</title>
     <!-- Link Animasi AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-
-    <!-- Link Data Tabels -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
 
     <link rel="icon" href="asset/logoteam21.png" type="image/x-icon" />
 
@@ -21,8 +18,9 @@
     <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
 
     <!-- Link css -->
-    <link rel="stylesheet" href="css/dashboard.css" />
+    <!-- <link rel="stylesheet" href="css/profile.css" /> -->
     <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/about.css" />
   </head>
 
   <body>
@@ -45,14 +43,20 @@
           <ul class="menu-links">
             <li class="nav-link">
               <a href="index.html">
-                <i class="bx bx-home-alt icon"></i>
-                <span class="text nav-text">Dashboard</span>
+                <i class="bx bxs-home icon"></i>
+                <span class="text nav-text">Home</span>
               </a>
             </li>
             <li class="nav-link">
               <a href="profile.html">
-                <i class="bx bx-user-circle icon"></i>
-                <span class="text nav-text">Profile</span>
+                <i class="bx bxs-user-pin icon"></i>
+                <span class="text nav-text">Team</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="dashboard.html">
+                <i class="bx bxs-dashboard icon"></i>
+                <span class="text nav-text">Dashboard</span>
               </a>
             </li>
           </ul>
@@ -73,142 +77,121 @@
     </nav>
 
     <div class="hamburger">
-      <div class="nav-hamburger" data-aos="zoom-in" data-aos-duration="1500">
+      <div class="nav-hamburger">
         <i class="bx bx-menu open-menu" id="btn"></i>
         <i class="bx bx-menu-alt-right close-menu" id="btn"></i>
       </div>
     </div>
 
-    <!-- ========== Section ========== -->
-    <main class="container-dashboard">
-      <header class="dash-header">
-        <h1 class="content-text" data-aos="fade-down" data-aos-duration="1500">Pizza Sales Report</h1>
+    <!-- Hero -->
+    <section id="hero">
+      <div class="hero-tagline">
+        <div class="hero-name">
+          <h1>Pizza Sales Dashboard</h1>
+          <h1>Team 21 <span> Jakarta</span></h1>
+        </div>
+        <div class="hero-image">
+          <img src="asset/gambarhero.png" alt="Pizza pict">
+        </div>
+        <div class="hero-prof">
+          <div class="hero-text">
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-link-card">
+        <a href="#about" class="hero-link">About Team</a>
+      </div>
+    </section>
 
-        <form action="javascript/filter.js" class="select">
-          <div class="select-dropdown">
-            <div class="select-btn btn1" data-aos="fade-down" data-aos-duration="1500">
-              <span class="btn-text">Pizza Type</span>
-              <span class="arrow-dwn">
-                <i class="bx bx-chevron-up"></i>
-              </span>
-            </div>
-            <ul class="list-items pizza-type"></ul>
+    <section id="about" data-aos="fade-up" data-aos-duration="1500">
+      <div class="about-container">
+        <div class="about-tagline"data-aos="fade-up" data-aos-duration="1500">
+          <h2>Introducing Team</h2>
+        </div>
+        <div class="about-des"data-aos="fade-up" data-aos-duration="1500">
+          <div class="logo">
+            <img src="asset/logokampusmerdeka.png" alt="logo-km" class="logo-km">
           </div>
-          <div class="select-dropdown">
-            <div class="select-btn btn2" data-aos="fade-down" data-aos-duration="1500">
-              <span class="btn-text">Category</span>
-              <span class="arrow-dwn">
-                <i class="bx bx-chevron-up"></i>
-              </span>
-            </div>
-            <ul class="list-items pizza-category"></ul>
+          <div class="about-text">
+            <p>
+              Hello everyone!! We are Team 21 from the Jakarta Section participating in the MSIB Kampus Merdeka program in collaboration with RevoU in the KM FEB24 batch. We have completed the capstone project task for data analysis and software engineering in the form of a pizza sales dashboard website. Previously, we created this dashboard using Looker Studio and then displayed it in the form of a website.<br><br>
+              ✨
+              Thank you for visiting our page, and we hope it will be useful.✨
+            </p>
           </div>
-          <div class="select-dropdown">
-            <div class="select-btn btn3" data-aos="fade-down" data-aos-duration="1500">
-              <span class="btn-text">Size</span>
-              <span class="arrow-dwn">
-                <i class="bx bx-chevron-up"></i>
-              </span>
+          <div class="logo">
+            <img src="asset/logorevou.png" alt="logo-revou" class="logo-revou">
+          </div>
+        </div>
+      <div>
+    </section>
+    <section id="info">
+      <hr data-aos="fade-up" data-aos-duration="1500">
+      <div class="info-container">
+        <div class="info-tagline" data-aos="fade-up" data-aos-duration="1500">
+          <h2>Information</h2>
+        </div>
+        <div class="info-btn" data-aos="fade-up" data-aos-duration="1500">
+          <a href="https://lookerstudio.google.com/u/0/reporting/7a2ece5b-314b-4982-9e98-fca87be350ed/page/UdzvD/edit" class="info-link">Looker Studio</a>
+          <a href="https://mavenanalytics.io/data-playground?page=6&pageSize=5" class="info-link">Dataset</a>
+        </div>
+        <div class="info-card">
+          <div class="card card-background" data-aos="fade-up" data-aos-duration="1500">
+            <div class="card-title">
+              <h1>BACKGROUND</h1>
+              <p>Pizza Place is a company operating in the food sector, especially selling pizza. After analyzing the dataset in 2015, the company saw an opportunity to increase sales by 5-10% within 3 months in 2016. For this reason, the company designed a strategy to realize this opportunity.</p>
             </div>
-            <ul class="list-items pizza-size"></ul>
+          </div>
+          <div class="card card-capstone" data-aos="fade-up" data-aos-duration="1500">
+            <div class="card-title">
+              <h1>CAPSTONE</h1>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae, hic, beatae obcaecati autem inventore et quos saepe doloribus maxime nemo, minima suscipit eaque velit repellendus quia? Voluptatibus obcaecati sapiente doloribus!</p>
+            </div>
+          </div>
+          <div class="card card-dashboard" data-aos="fade-up" data-aos-duration="1500">
+            <div class="card-title">
+              <h1>DASHBOARD</h1>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, tempore? Quam laboriosam corrupti velit praesentium, quasi fugiat, harum nemo mollitia dolor voluptas quisquam totam porro repellendus aut odit ex aliquam!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="contact">
+      <div class="contact-tagline" data-aos="fade-up" data-aos-duration="1500">
+        <h2>Get in Touch!</h2>
+      </div>
+      <div class="form-hero" data-aos="fade-up" data-aos-duration="1500">
+        <form>
+          <div class="form-heading">
+            <h4>Contact Form</h4>
+          </div>
+          <div class="form-name">
+            <div class="form-input">
+              <label for="first-name">First Name</label>
+            <input type="text" id="first-name" required placeholder="Your Fistname">
+            </div>
+            <div class="form-input">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" required placeholder="Your Lastname">
+          </div>
+          </div>
+          <div class="form-input">
+            <label for="email">Email</label>
+            <input type="email" id="email" required placeholder="Your Email">            
+          </div>
+          <div class="form-input">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Your Message"></textarea>
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="form-button">Submit</button>
           </div>
         </form>
-      </header>
-
-      <section>
-        <div class="analys">
-          <div class="analys-sales" data-aos="fade-down" data-aos-duration="1500">
-            <div class="sales-text total-sales" data-aos="zoom-in" data-aos-duration="1500">
-              <h3>Total Sales</h3>
-              <h1 class="counting">$0</h1>
-            </div>
-            <div class="sales-icon">
-              <i class="bx bx-wallet"></i>
-            </div>
-          </div>
-          <div class="analys-sales" data-aos="fade-down" data-aos-duration="1500">
-            <div class="sales-text average-sales">
-              <h3>Average Sales</h3>
-              <h1 class="counting">$0</h1>
-            </div>
-            <div class="sales-icon">
-              <i class="bx bx-coin-stack"></i>
-            </div>
-          </div>
-          <div class="analys-sales" data-aos="fade-down" data-aos-duration="1500">
-            <div class="sales-text num-of-orders">
-              <h3>Number of Order</h3>
-              <h1 class="counting">0</h1>
-            </div>
-            <div class="sales-icon">
-              <i class="bx bx-cart"></i>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="dashboard">
-        <div class="chart">
-          <div class="chart-item" data-aos="fade-up" data-aos-duration="1500">
-            <div class="chart-text">
-              <p>TOP 5 BEST SELLING PIZZA TYPE</p>
-            </div>
-            <div class="chart-img">
-              <canvas id="top5BestSellingPizzaTypeChart"></canvas>
-            </div>
-          </div>
-          <div class="chart-item" data-aos="fade-up" data-aos-duration="1500">
-            <div class="chart-text">
-              <p>TOP 5 LEAST SELLING PIZZA TYPE</p>
-            </div>
-            <div class="chart-img">
-              <canvas id="top5LeastSellingPizzaTypeChart"></canvas>
-            </div>
-          </div>
-          <div class="chart-item" data-aos="fade-up" data-aos-duration="1500">
-            <div class="chart-text">
-              <p>BEST SELLING PIZZA SIZE</p>
-            </div>
-            <div class="chart-img">
-              <canvas id="bestSellingPizzaSizeChart"></canvas>
-            </div>
-          </div>
-          <div class="chart-item" data-aos="fade-up" data-aos-duration="1500">
-            <div class="chart-text">
-              <p>AVERAGE PURCHASED PRICE</p>
-            </div>
-            <div class="chart-img">
-              <canvas id="averagePurchasedPriceChart"></canvas>
-            </div>
-          </div>
-          <div class="chart-item" data-aos="fade-up" data-aos-duration="1500">
-            <div class="chart-text">
-              <p>DAILY PIZZA SALES TRENDS</p>
-            </div>
-            <div class="chart-img">
-              <canvas id="dailyPizzaSalesTrendChart"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <div class="table" data-aos="fade-up" data-aos-duration="1500">
-          <div class="table-header">
-            <h3>BEST SELLING PIZZA</h3>
-          </div>
-          <table class="content-table display">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Pizza Name</th>
-                <th>Sum of Price</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-
+      </div>
+    </section>
     <footer>
       <div class="footer-card">
         <h3>
@@ -218,11 +201,7 @@
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script src="javascript/filter.js"></script>
+    <script src="javascript/profile.js"></script>
     <script src="javascript/sidebar.js"></script>
     <script>
       AOS.init();
