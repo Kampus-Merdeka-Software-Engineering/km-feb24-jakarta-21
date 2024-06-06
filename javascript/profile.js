@@ -14,7 +14,7 @@ let teamName = [
     duration : 1000,
   },
   {
-    image: "asset/photoAchaa.png",
+    image: "asset/photoMei.jpg",
     name: "Siti Maysaroh Zain",
     universitas: "Univ. Hasanuddin",
     jobdesk: ["DA Data Cleaning", "SE Frontend Developer"],
@@ -65,7 +65,7 @@ let teamName = [
   {
     image: "asset/photoKentji.jpg",
     name: "Kentji Hadiwidjajalu",
-    universitas: "Univ. Tarumanegara",
+    universitas: "Univ. Tarumanagara",
     jobdesk: ["DA Data Analysis", "SE Quality Assurance"],
     duration : 2600,
   },

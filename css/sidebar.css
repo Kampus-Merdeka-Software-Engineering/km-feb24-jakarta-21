@@ -50,7 +50,7 @@ body.dark {
   box-shadow: 0.5px 0 5px var(--text-color);
   background: var(--sidebar-color);
   transition: var(--tran-05);
-  z-index: 1000;
+  z-index: 1100;
 }
 .sidebar.close-sidebar {
   width: 70px;
@@ -226,7 +226,6 @@ body.dark .mode .sun-moon i.moon {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px;
   border: 2px solid var(--hamburger);
 }
 .nav-hamburger i {
