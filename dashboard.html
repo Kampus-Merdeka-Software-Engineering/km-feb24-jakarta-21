@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza Sales Team 21 - Dashboard</title>
+    <!-- Link Animasi AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- Link Data Tabels -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+
+    <link rel="icon" href="asset/logoteam21.png" type="image/x-icon" />
+
+    <!-- Link Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
+
+    <!-- Link Icon -->
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- Link css -->
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+  </head>
+
+  <body>
+    <!-- ========== Sidebar ========== -->
+    <nav class="sidebar close-sidebar">
+      <header>
+        <div class="header-logo" data-aos="fade-right" data-aos-duration="1000">
+          <span class="image">
+            <img src="asset/logoteam21.png" alt="logo" />
+          </span>
+          <div class="text logo-text">
+            <span class="name">Jakarta 21</span>
+          </div>
+        </div>
+        <i class="bx bx-chevron-right toggle" data-aos="zoom-in" data-aos-duration="1000"></i>
+      </header>
+
+      <div class="nav-menu" data-aos="fade-right" data-aos-duration="1000">
+        <div class="menu">
+          <ul class="menu-links">
+            <li class="nav-link">
+              <a href="index.html">
+                <i class="bx bxs-home icon"></i>
+                <span class="text nav-text">Home</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="profile.html">
+                <i class="bx bxs-user-pin icon"></i>
+                <span class="text nav-text">Team</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="dashboard.html">
+                <i class="bx bxs-dashboard icon"></i>
+                <span class="text nav-text">Dashboard</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bottom-content">
+          <ul>
+            <li class="mode toggle-switch">
+              <div class="sun-moon">
+                <i class="bx bx-moon icon moon"></i>
+                <i class="bx bx-sun icon sun"></i>
+              </div>
+              <span class="mode-text text">Dark mode</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hamburger">
+      <div class="nav-hamburger" data-aos="zoom-in" data-aos-duration="1500">
+        <i class="bx bx-menu open-menu" id="btn"></i>
+        <i class="bx bx-menu-alt-right close-menu" id="btn"></i>
+      </div>
+    </div>
+
+    <!-- ========== Section ========== -->
+    <main class="container-dashboard">
+      <header class="dash-header">
+        <h1 class="content-text" data-aos="fade-down" data-aos-duration="1500">Pizza Sales Report</h1>
+
+        <form action="javascript/filter.js" class="select">
+          <div class="select-dropdown">
+            <div class="select-btn btn1" data-aos="fade-down" data-aos-duration="1500">
+              <span class="btn-text">Pizza Type</span>
+              <span class="arrow-dwn">
+                <i class="bx bx-chevron-up"></i>
+              </span>
+            </div>
+            <ul class="list-items pizza-type"></ul>
+          </div>
+          <div class="select-dropdown">
+            <div class="select-btn btn2" data-aos="fade-down" data-aos-duration="1500">
+              <span class="btn-text">Category</span>
+              <span class="arrow-dwn">
+                <i class="bx bx-chevron-up"></i>
+              </span>
+            </div>
+            <ul class="list-items pizza-category"></ul>
+          </div>
+          <div class="select-dropdown">
+            <div class="select-btn btn3" data-aos="fade-down" data-aos-duration="1500">
+              <span class="btn-text">Size</span>
+              <span class="arrow-dwn">
+                <i class="bx bx-chevron-up"></i>
+              </span>
+            </div>
+            <ul class="list-items pizza-size"></ul>
+          </div>
+        </form>
+      </header>
+
+      <section>
+        <div class="analys">
+          <div class="analys-sales" data-aos="fade-down" data-aos-duration="1500">
+            <div class="sales-text total-sales" data-aos="zoom-in" data-aos-duration="1500">
+              <h3>Total Sales</h3>
+              <h1 class="counting">$0</h1>
+            </div>
+            <div class="sales-icon">
+              <i class="bx bx-wallet"></i>
+            </div>
+          </div>
+          <div class="analys-sales" data-aos="fade-down" data-aos-duration="1500">
+            <div class="sales-text average-sales">
+              <h3>Average Sales</h3>
+              <h1 class="counting">$0</h1>
+            </div>
+            <div class="sales-icon">
+              <i class="bx bx-coin-stack"></i>
+            </div>
+          </div>
+          <div class="analys-sales" data-aos="fade-down" data-aos-duration="1500">
+            <div class="sales-text num-of-orders">
+              <h3>Number of Order</h3>
+              <h1 class="counting">0</h1>
+            </div>
+            <div class="sales-icon">
+              <i class="bx bx-cart"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard">
+        <div class="chart">
+          <div class="chart-item" data-aos="fade-up" data-aos-duration="1500">
+            <div class="chart-text">
+              <p>TOP 5 BEST SELLING PIZZA TYPE</p>
+            </div>
+            <div class="chart-img">
+              <canvas id="top5BestSellingPizzaTypeChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-item" data-aos="fade-up" data-aos-duration="1500">
+            <div class="chart-text">
+              <p>TOP 5 LEAST SELLING PIZZA TYPE</p>
+            </div>
+            <div class="chart-img">
+              <canvas id="top5LeastSellingPizzaTypeChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-item" data-aos="fade-up" data-aos-duration="1500">
+            <div class="chart-text">
+              <p>BEST SELLING PIZZA SIZE</p>
+            </div>
+            <div class="chart-img">
+              <canvas id="bestSellingPizzaSizeChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-item" data-aos="fade-up" data-aos-duration="1500">
+            <div class="chart-text">
+              <p>AVERAGE PURCHASED PRICE</p>
+            </div>
+            <div class="chart-img">
+              <canvas id="averagePurchasedPriceChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-item" data-aos="fade-up" data-aos-duration="1500">
+            <div class="chart-text">
+              <p>DAILY PIZZA SALES TRENDS</p>
+            </div>
+            <div class="chart-img">
+              <canvas id="dailyPizzaSalesTrendChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="table" data-aos="fade-up" data-aos-duration="1500">
+          <div class="table-header">
+            <h3>BEST SELLING PIZZA</h3>
+          </div>
+          <table class="content-table display">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Pizza Name</th>
+                <th>Sum of Price</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-card">
+        <h3>
+          2024 MSIB RevoU - <span><a href="https://github.com/Kampus-Merdeka-Software-Engineering/km-feb24-jakarta-21">Jakarta Team 21</a></span>
+        </h3>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="javascript/filter.js"></script>
+    <script src="javascript/sidebar.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>
