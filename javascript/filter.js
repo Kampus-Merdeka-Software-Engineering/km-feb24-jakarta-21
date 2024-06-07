@@ -63,9 +63,6 @@ fetch("./data.json")
       checkbox.addEventListener("change", () => {
         const selectedFilters = getSelectedFilters();
         updateFilters(data, selectedFilters);
-        // const filteredData = data.filter(filterData(selectedFilters));
-        // displayData(filteredData);
-        // console.log(filteredData);
         const filteredData = data.filter(filterData(selectedFilters));
         if (Object.values(selectedFilters).every((filter) => filter.length === 0)) {
           displayData([]); // Tampilkan data kosong jika tidak ada yang di ceklis
@@ -160,7 +157,6 @@ function getSelectedFilters() {
     const attribute = checkbox.parentElement.getAttribute("data-attribute");
     selectedFilters[attribute].push(checkbox.id);
   });
-  // console.log(selectedFilters);
   return selectedFilters;
 }
 

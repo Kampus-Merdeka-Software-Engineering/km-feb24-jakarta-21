@@ -48,7 +48,6 @@ body.dark {
 }
 
 .container-dashboard {
-  height: 100%;
   width: 100%;
   padding: 20px 15px 20px 90px;
 }
@@ -120,7 +119,6 @@ header .select-btn .arrow-dwn {
 .select-btn.open-list ~ .list-items {
   max-height: 285px;
   opacity: 1;
-  /* padding: 5px; */
 }
 
 .select .pizza-type {
@@ -263,6 +261,9 @@ header .select-btn .arrow-dwn {
   box-sizing: border-box;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
+.chart .chart-item:hover {
+  transform: scale(1.03);
+}
 .chart .chart-item .chart-img {
   width: 100%;
   height: 95%;
@@ -352,30 +353,7 @@ div.dt-container .dt-paging .dt-paging-button.disabled:active {
   color: #f4f4f4 !important;
 }
 
-/* ========== Footer ========== */
-/* ========== Footer ========== */
-footer {
-  background-color: #886839;
-  width: 100%;
-  padding: 15px 20px;
-}
-footer .footer-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-footer .footer-card h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-footer span a {
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-
+/* ============= RESPONSIVE =============== */
 @media screen and (max-width: 1350px) {
   .chart {
     grid-template-columns: repeat(2, 1fr);
@@ -446,9 +424,6 @@ footer span a {
   }
   .chart .chart-item {
     max-height: 320px;
-  }
-  footer {
-    border-radius: 25px 25px 0 0 ;
   }
 }
 @media screen and (max-width: 576px) {
