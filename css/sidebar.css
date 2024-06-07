@@ -41,7 +41,6 @@ body.dark {
 
 /* ========== Sidebar ========== */
 /* ========== Sidebar ========== */
-/* ========== Sidebar ========== */
 .sidebar {
   position: fixed;
   height: 100%;
@@ -134,11 +133,7 @@ body.dark {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* overflow-y: scroll; */
 }
-/* .nav-menu::-webkit-scrollbar {
-        display: none;
-    } */
 .sidebar .menu {
   height: 100%;
   display: flex;
@@ -233,7 +228,7 @@ body.dark .mode .sun-moon i.moon {
   color: var(--hamburger);
 }
 
-
+/* ============ RESPONSIVE =============== */
 @media screen and (max-width: 768px) {
   html {
     font-size: 12px !important;

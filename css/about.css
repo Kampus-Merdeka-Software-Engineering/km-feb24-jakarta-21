@@ -6,12 +6,14 @@
 html {
   font-family: "DM Sans", sans-serif;
   font-size: 14px;
+  scroll-behavior: smooth;
 }
 :root {
   /* ===== Color ===== */
   --body-color: #e0e6f5;
   --body-color-about: #fff; 
   --text-color: #1b1b1b;
+  --btn-color: #886839;
   --card-color-about: #e0e6f5;
 
   /* ====== Transition ====== */
@@ -31,6 +33,7 @@ body.dark {
   --body-color: #1b1b1b;
   --body-color-about: #1b1b1b;
   --text-color: #fff;
+  --btn-color: #E4B455;
   --card-color-about: #2c2f38;
 }
 
@@ -50,14 +53,14 @@ body.dark {
   justify-content: center;
 }
 .hero-tagline .hero-name h1 {
-  font-weight: 700;
-  font-size: 2.2rem;
+  font-weight: 1000;
+  font-size: 3rem;
   letter-spacing: 0.5rem;
   padding: 5px 0;
   color: var(--text-color);
 }
 .hero-tagline .hero-name h1 span {
-  color: var(--text-color);
+  color: var(--btn-color);
 }
 .hero-tagline .hero-image {
   display: flex;
@@ -145,16 +148,19 @@ body.dark {
   padding: 10px 20px;
   text-decoration: none;
   color: var(--text-color);
-  border: 1px solid var(--text-color);
   box-shadow: 0 0.5px 10px var(--text-color);
   border-radius: 10px;
   font-size: 1rem;
   font-weight: 700;
 }
+.hero-link-card .hero-link:hover {
+  background-color: var(--btn-color);
+}
 
 #about {
   background-color: var(--body-color-about);
   padding: 20px 50px 30px 120px;
+  scroll-margin-top: 80px;
 }
 .about-tagline {
   text-align: center;
@@ -172,7 +178,7 @@ body.dark {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin: 0 80px;
-  padding: 30px 20px;
+  padding: 30px;
   text-align: center;
   background-color: var(--card-color-about);
   transition: var(--tran-04);
@@ -202,7 +208,6 @@ body.dark {
 }
 .info-btn {
   display: flex;
-  /* justify-content: center; */
   gap: 10px;
 }
 .info-btn .info-link {
@@ -211,7 +216,7 @@ body.dark {
   align-items: center;
   width: 180px;
   height: 50px;
-  background-color: #feb930;
+  background-color: var(--btn-color);
   text-decoration: none;
   margin: 0 0 30px 0;
   color: #fff;
@@ -226,7 +231,7 @@ body.dark {
   box-sizing: border-box;
   color: #fff;
   padding: 0 0px;
-  gap: 10px;
+  gap: 15px;
 }
 .info-card .card {
   display: flex;
@@ -239,6 +244,10 @@ body.dark {
   background-repeat: no-repeat;
   background-size: cover;
   text-align: justify;
+  /* transition: var(--tran-05); */
+}
+.info-card .card:hover {
+  transform: scale(1.05);
 }
 .card-background {
   background-image: url("../asset/gambar1.jpg");
@@ -248,6 +257,11 @@ body.dark {
 }
 .card-dashboard {
   background-image: url("../asset/gambar3.jpg");
+}
+.card .card-title h1 {
+  font-size: 1.5rem;
+  text-decoration: underline;
+  padding: 10px 0;
 }
 
 #contact {
@@ -260,6 +274,7 @@ body.dark {
   font-size: 1.7rem;
   color: var(--text-color);
   margin: 40px 0 30px 0;
+  text-decoration: underline;
 }
 .form-hero {
   width: 100%;
@@ -321,30 +336,7 @@ label {
   margin-top: 10px;
 }
 
-/* ========== Footer ========== */
-/* ========== Footer ========== */
-footer {
-  background-color: #886839;
-  width: 100%;
-  padding: 15px 20px;
-}
-footer .footer-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-footer .footer-card h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-footer span a {
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-
+/* ============= RESPONSIVE =============== */
 @media screen and (max-width: 1200px) {
   #hero {
     padding: 20px 50px 20px 120px;
@@ -357,7 +349,10 @@ footer span a {
   #hero {
     padding: 20px 50px 20px 120px;
   }
-  .hero-tagline .hero-name h1,
+  .hero-tagline .hero-name h1 {
+    font-size: 2.5rem;
+    letter-spacing: 0.5rem;
+  }
   .hero-tagline .hero-prof .hero-text {
     font-size: 2rem;
     letter-spacing: 0.5rem;
@@ -397,13 +392,19 @@ footer span a {
   }
 }
 @media screen and (max-width: 768px) {
+  html {
+    font-size: 12px !important;
+  }
   #hero {
-    padding: 80px 7% 40px 7%;
+    padding: 80px 2% 40px 2%;
   }
   #contact,
   #about,
   #info {
     padding: 20px 7%;
+  }
+  #about {
+    scroll-margin-top: 110px;
   }
   .about-tagline {
     text-align: left;
@@ -414,12 +415,15 @@ footer span a {
     width: 130px;
     height: 40px;
   }
+  .form-hero {
+    margin-bottom: 15px;
+  }
 }
 @media screen and (max-width: 576px) {
-  html {
-    font-size: 12px !important;
+  .hero-tagline .hero-name h1 {
+    font-size: 2rem;
+    letter-spacing: 0.4rem;
   }
-  .hero-tagline .hero-name h1,
   .hero-tagline .hero-prof .hero-text {
     font-size: 1.8rem;
     letter-spacing: 0.4rem;
@@ -446,7 +450,10 @@ footer span a {
   }
 }
 @media screen and (max-width: 400px) {
-  .hero-tagline .hero-name h1,
+  .hero-tagline .hero-name h1 {
+    font-size: 1.8rem;
+    letter-spacing: 0.3rem;
+  }
   .hero-tagline .hero-prof .hero-text {
     font-size: 1.6rem;
     letter-spacing: 0.3rem;

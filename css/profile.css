@@ -35,7 +35,6 @@ body.dark {
 }
 
 .container-profile {
-  height: 100%;
   width: 100%;
   padding: 20px 50px 20px 120px;
 }
@@ -65,6 +64,9 @@ body.dark {
   text-align: center;
   box-shadow: 0px 3px 8px rgb(0, 0, 0, 0.2);
   transition: var(--tran-03);
+}
+.container-card .box:hover {
+  transform: scale(1.05);
 }
 .container-card .box .image {
   margin: 5px 0;
@@ -108,36 +110,7 @@ p {
   color: var(--text-color);
 }
 
-/* ========== Footer ========== */
-/* ========== Footer ========== */
-footer {
-  background-color: #886839;
-  width: 100%;
-  padding: 15px 20px;
-}
-footer .footer-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-footer .footer-card h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-footer span a {
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-@media screen and (max-width: 1200px) {
-
-}
-@media screen and (max-width: 991px) {
-
-}
+/* ============= RESPONSIVE =============== */
 @media screen and (max-width: 768px) {
   html {
     font-size: 12px !important;
@@ -152,8 +125,4 @@ footer span a {
     border-radius: 20px 20px 0 0 ;
   }
 }
-@media screen and (max-width: 576px) {
-  
-}
-@media screen and (max-width: 400px) {
-}
+
