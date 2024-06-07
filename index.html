@@ -18,9 +18,9 @@
     <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
 
     <!-- Link css -->
-    <!-- <link rel="stylesheet" href="css/profile.css" /> -->
     <link rel="stylesheet" href="css/sidebar.css" />
     <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/footer.css">
   </head>
 
   <body>
@@ -83,7 +83,7 @@
       </div>
     </div>
 
-    <!-- Hero -->
+    <!------------------ Hero ------------------>
     <section id="hero">
       <div class="hero-tagline">
         <div class="hero-name">
@@ -104,6 +104,7 @@
       </div>
     </section>
 
+    <!------------------ About ------------------>
     <section id="about" data-aos="fade-up" data-aos-duration="1500">
       <div class="about-container">
         <div class="about-tagline"data-aos="fade-up" data-aos-duration="1500">
@@ -126,6 +127,8 @@
         </div>
       <div>
     </section>
+
+    <!------------------ Info ------------------>
     <section id="info">
       <hr data-aos="fade-up" data-aos-duration="1500">
       <div class="info-container">
@@ -140,25 +143,32 @@
           <div class="card card-background" data-aos="fade-up" data-aos-duration="1500">
             <div class="card-title">
               <h1>BACKGROUND</h1>
-              <p>Pizza Place is a company operating in the food sector, especially selling pizza. After analyzing the dataset in 2015, the company saw an opportunity to increase sales by 5-10% within 3 months in 2016. For this reason, the company designed a strategy to realize this opportunity.</p>
+              <p>
+                Pizza Place is a company operating in the food sector, especially selling pizza. After analyzing the dataset in 2015, the company saw an opportunity to increase sales by 5-10% within 3 months in 2016. For this reason, the company designed a strategy to realize this opportunity.
+              </p>
             </div>
           </div>
           <div class="card card-capstone" data-aos="fade-up" data-aos-duration="1500">
             <div class="card-title">
               <h1>CAPSTONE</h1>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae, hic, beatae obcaecati autem inventore et quos saepe doloribus maxime nemo, minima suscipit eaque velit repellendus quia? Voluptatibus obcaecati sapiente doloribus!</p>
+              <p>
+                Capstone project team 21 conducted a one-year analysis of pizza sales data to identify sales performance from the lowest to the highest. We then presented the analysis results by creating a dashboard website that includes charts, making it easier for us to draw conclusions.
+              </p>
             </div>
           </div>
           <div class="card card-dashboard" data-aos="fade-up" data-aos-duration="1500">
             <div class="card-title">
               <h1>DASHBOARD</h1>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, tempore? Quam laboriosam corrupti velit praesentium, quasi fugiat, harum nemo mollitia dolor voluptas quisquam totam porro repellendus aut odit ex aliquam!</p>
+              <p>
+                This dashboard was created to visualize the results of the pizza sales data we previously analyzed. We utilized data on pizza type, category, and pizza size to obtain accurate analysis results, which we can use as samples to improve pizza sales in the following year.
+              </p>
             </div>
           </div>
         </div>
       </div>
     </section>
     
+    <!------------------ Contact ------------------>
     <section id="contact">
       <div class="contact-tagline" data-aos="fade-up" data-aos-duration="1500">
         <h2>Get in Touch!</h2>
@@ -192,19 +202,24 @@
         </form>
       </div>
     </section>
+    
     <footer>
       <div class="footer-card">
         <h3>
-          2024 MSIB RevoU - <span><a href="https://github.com/Kampus-Merdeka-Software-Engineering/km-feb24-jakarta-21">Jakarta Team 21</a></span>
+          Kampus Merdeka X RevoU Batch FEB24 - <span><a href="https://github.com/Kampus-Merdeka-Software-Engineering/km-feb24-jakarta-21">Jakarta Team 21</a></span>
         </h3>
       </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="javascript/profile.js"></script>
     <script src="javascript/sidebar.js"></script>
     <script>
       AOS.init();
+    </script>
+    <script>
+      window.onload = function() {
+        window.scrollTo(0, 0);
+      };
     </script>
   </body>
 </html>
