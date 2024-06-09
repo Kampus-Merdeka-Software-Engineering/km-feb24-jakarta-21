@@ -87,7 +87,7 @@ body.dark {
   position: absolute;
   top: 50%;
   right: -20px;
-  transform: translateY(-50%) rotate(180deg);
+  transform: translateY(-50%) rotate(0deg);
   height: 20px;
   width: 20px;
   background-color: var(--toggle-color);
@@ -101,7 +101,7 @@ body.dark {
   transition: var(--tran-05);
 }
 .sidebar.close-sidebar .toggle {
-  transform: translateY(-50%) rotate(0deg);
+  transform: translateY(-50%) rotate(180deg);
 }
 .sidebar.close-sidebar .text {
   opacity: 0;
